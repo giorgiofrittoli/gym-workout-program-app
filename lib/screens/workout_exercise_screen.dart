@@ -27,25 +27,27 @@ class WorkoutExcerciseScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  Text("Descrizione:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  Text(
+                    "Descrizione:",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                   SizedBox(height: 10),
                   Text(
                     "${workoutExercise.exercise.description}",
                     textAlign: TextAlign.center,
                     softWrap: true,
-                    style: TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  Text("Esecuzione:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  Text(
+                    "Esecuzione:",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                   SizedBox(height: 10),
                   Text(
                     "${workoutExercise.description}",
                     textAlign: TextAlign.center,
                     softWrap: true,
-                    style: TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
               ),

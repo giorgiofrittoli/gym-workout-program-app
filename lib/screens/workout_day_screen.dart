@@ -14,7 +14,7 @@ class WorkoutDayScreen extends StatelessWidget {
         title: Text(workoutDay.title),
       ),
       body: Container(
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.all(10),
         padding: EdgeInsets.all(10),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

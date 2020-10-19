@@ -15,10 +15,15 @@ class WorkoutProgramScreen extends StatelessWidget {
         margin: EdgeInsets.all(10),
         child: Column(
           children: [
-            Text("Data inizio: ${workoutProgram.start}"),
+            Text(
+              "Data inizio: ${workoutProgram.start}",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
             SizedBox(height: 5),
             Text(
-                "Durata: ${workoutProgram.duration} ${workoutProgram.durationString}"),
+              "Durata: ${workoutProgram.duration} ${workoutProgram.durationString}",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
             Divider(thickness: 2),
             SizedBox(height: 20),
             Container(
