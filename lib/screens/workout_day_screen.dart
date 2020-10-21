@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import '../models/workout_day.dart';
 
+import '../models/workout_day.dart';
 import '../widgets/workout_day_item.dart';
 
 class WorkoutDayScreen extends StatelessWidget {
@@ -14,13 +14,7 @@ class WorkoutDayScreen extends StatelessWidget {
         title: Text(workoutDay.title),
       ),
       body: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 5 / 4,
-            crossAxisCount: 2,
-          ),
+        child: ListView.builder(
           itemBuilder: (ctx, i) {
             return WorkoutDayItem(workoutDay.lWorkoutExercise[i]);
           },

@@ -15,7 +15,7 @@ final ex1 = Exercize(
   id: "1",
   title: "Esercizio 1",
   description: "Descrizione esercizio 1\nDescrizione esercizio 1\nDescrizione esercizio 1\nDescrizione esercizio 1Descrizione esercizio 1Descrizione esercizio o 1Descrizione esercizio o 1Descrizione esercizio 1\n",
-  imageURL: "https://i.ytimg.com/vi/5F8iPHvVq6E/maxresdefault.jpg",
+  imageURL: "https://www.bodybuilding.com/images/2016/august/5-best-shoulder-workouts-for-mass-an-intermediate-guide-header-960x540.jpg",
 );
 
 final workoutProgram = WorkoutProgram(
