@@ -3,8 +3,10 @@ import 'exercise.dart';
 class WorkoutExercise {
   final String id;
   final Exercize exercise;
-  final String description;
+  final String reps;
+  final String pause;
   final String notes;
+  bool active;
 
-  WorkoutExercise({this.id, this.exercise, this.description, this.notes});
+  WorkoutExercise({this.id, this.exercise, this.reps, this.notes, this.pause, this.active = false});
 }

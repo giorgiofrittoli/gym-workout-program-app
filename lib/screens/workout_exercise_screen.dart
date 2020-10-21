@@ -39,12 +39,24 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Text(
-                    "Esecuzione:",
+                    "Ripetizioni:",
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "${workoutExercise.description}",
+                    "${workoutExercise.reps}",
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Pausa:",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "${workoutExercise.pause}",
                     textAlign: TextAlign.center,
                     softWrap: true,
                     style: Theme.of(context).textTheme.subtitle1,

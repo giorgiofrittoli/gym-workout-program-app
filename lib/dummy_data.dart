@@ -15,7 +15,7 @@ final ex1 = Exercize(
   id: "1",
   title: "Esercizio 1",
   description: "Descrizione esercizio 1\nDescrizione esercizio 1\nDescrizione esercizio 1\nDescrizione esercizio 1Descrizione esercizio 1Descrizione esercizio o 1Descrizione esercizio o 1Descrizione esercizio 1\n",
-  imageURL: "https://www.bodybuilding.com/images/2016/august/5-best-shoulder-workouts-for-mass-an-intermediate-guide-header-960x540.jpg",
+  imageURL: "https://img.villaggiomusicale.com/avt/203549.jpg",
 );
 
 final workoutProgram = WorkoutProgram(
@@ -34,25 +34,30 @@ final workoutProgram = WorkoutProgram(
         WorkoutExercise(
           id: "1",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "Settimana 1 1x10 1x8 1x6 3x4\nSettimana 2 1x10 1x8 1x6 3x4\nSettimana 3 1x10 1x8 1x6 3x4\nSettimana 4 1x10 1x8 1x6 3x4\n",
+          pause: "1 min",
+          active: true,
           notes: "",
         ),
         WorkoutExercise(
           id: "2",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "dasdsadsadsad",
+          pause: "1 min",
           notes: "",
         ),
         WorkoutExercise(
           id: "1",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "dasdsadsadsad",
+          pause: "1 min",
           notes: "",
         ),
         WorkoutExercise(
           id: "2",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "dasdsadsadsad",
+          pause: "1 min",
           notes: "",
         ),
       ],
@@ -66,13 +71,15 @@ final workoutProgram = WorkoutProgram(
         WorkoutExercise(
           id: "1",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "Settimana 1 1x10 1x8 1x6 3x4\nSettimana 2 1x10 1x8 1x6 3x4\nSettimana 3 1x10 1x8 1x6 3x4\nSettimana 4 1x10 1x8 1x6 3x4\n",
+          pause: "1 min",
           notes: "",
         ),
         WorkoutExercise(
           id: "2",
           exercise: ex1,
-          description: "dasdsadsadsad",
+          reps: "dasdsadsadsad",
+          pause: "1 min",
           notes: "",
         )
       ],
