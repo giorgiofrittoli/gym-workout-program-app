@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
 
 import 'user.dart';
 
 enum DurationType { DAYS, WEEKS, MONTHS }
 
-class WorkoutProgram {
+class WorkoutProgram with ChangeNotifier {
   final String id;
   final DateTime start;
   final int duration;

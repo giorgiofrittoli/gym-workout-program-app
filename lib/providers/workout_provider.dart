@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:gym_workout_program/models/workout_day.dart';
+
+import "../dummy_data.dart";
+import '../models/workout_program.dart';
+
+class WorkoutProvider with ChangeNotifier {
+  WorkoutProgram _workoutProgram = workoutProgram;
+  String _authToken;
+
+  List<WorkoutDay> get workoutDays {
+    return [..._workoutProgram.workoutDays];
+  }
+
+  String get durationS {
+    return "${_workoutProgram.duration} ${_workoutProgram.durationString}";
+  }
+
+  String get startS {
+    return _workoutProgram.start.toIso8601String();
+  }
+
+  WorkoutDay workoutDay(String id) {
+    return _workoutProgram.workoutDays
+        .firstWhere((workoutDay) => workoutDay.id == id);
+  }
+
+  void resetExercices(String idWorkoutDay) {
+    _workoutProgram.workoutDays.forEach((workoutDay) => workoutDay
+        .lWorkoutExercise
+        .forEach((element) => element.active = false));
+    workoutDay(idWorkoutDay).lWorkoutExercise[0].active = true;
+  }
+
+  void nextExercise(String id) {
+    final WorkoutDay wDay = workoutDay(id);
+    final iExActive =
+        wDay.lWorkoutExercise.indexWhere((exercise) => exercise.active);
+    if (iExActive < wDay.lWorkoutExercise.length - 1) {
+      wDay.lWorkoutExercise[iExActive + 1].active = true;
+      wDay.lWorkoutExercise[iExActive].active = false;
+      notifyListeners();
+    }
+  }
+}

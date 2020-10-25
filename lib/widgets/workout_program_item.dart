@@ -15,7 +15,7 @@ class WorkoutProgramItem extends StatelessWidget {
       width: 300,
       child: InkWell(
         onTap: () => Navigator.of(context)
-            .pushNamed(WorkoutDayScreen.routeName, arguments: workoutDay),
+            .pushNamed(WorkoutDayScreen.routeName, arguments: workoutDay.id),
         child: Card(
           margin: EdgeInsets.all(10),
           elevation: 2,

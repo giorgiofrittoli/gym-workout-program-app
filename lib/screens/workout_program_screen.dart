@@ -1,11 +1,13 @@
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
-import "../dummy_data.dart";
+import "../providers/workout_provider.dart";
 import '../widgets/workout_program_item.dart';
 
 class WorkoutProgramScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final workoutProgram = Provider.of<WorkoutProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Workout program"),
@@ -16,12 +18,12 @@ class WorkoutProgramScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Data inizio: ${workoutProgram.start}",
+              "Data inizio: ${workoutProgram.startS}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
             SizedBox(height: 5),
             Text(
-              "Durata: ${workoutProgram.duration} ${workoutProgram.durationString}",
+              "Durata: ${workoutProgram.durationS}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
             Divider(thickness: 2),
