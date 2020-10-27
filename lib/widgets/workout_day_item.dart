@@ -73,15 +73,22 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                       ),
                       SingleChildScrollView(
                         child: Container(
+                          width: MediaQuery.of(context).size.width - 170,
                           margin: EdgeInsets.only(left: 10, right: 10),
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(widget.workoutExercise.reps),
-                                Text(
-                                  "Pausa: ${widget.workoutExercise.pause}",
-                                ),
-                              ]),
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.workoutExercise.reps,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "Pausa: ${widget.workoutExercise.pause}",
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

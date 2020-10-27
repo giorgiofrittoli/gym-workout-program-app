@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
+import "package:intl/intl.dart";
 
 import "../dummy_data.dart";
 import '../models/workout_program.dart';
@@ -17,7 +18,7 @@ class WorkoutProvider with ChangeNotifier {
   }
 
   String get startS {
-    return _workoutProgram.start.toIso8601String();
+    return DateFormat("dd-MM-yyyy").format(_workoutProgram.start);
   }
 
   WorkoutDay workoutDay(String id) {
