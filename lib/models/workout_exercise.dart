@@ -2,7 +2,7 @@ import 'exercise.dart';
 
 class WorkoutExercise {
   final String id;
-  final Exercize exercise;
+  final Exercise exercise;
   final String reps;
   final String pause;
   final String notes;

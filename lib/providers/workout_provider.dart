@@ -1,20 +1,23 @@
+import "dart:convert";
+
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
+import 'package:gym_workout_program/models/workout_exercise.dart';
+import "package:http/http.dart" as http;
 import "package:intl/intl.dart";
 
-import "../dummy_data.dart";
 import '../models/workout_program.dart';
 
 class WorkoutProvider with ChangeNotifier {
-  WorkoutProgram _workoutProgram = workoutProgram;
-  String _authToken;
+  WorkoutProgram _workoutProgram;
+  String _authToken = "32d2bf38-270c-48de-a6d2-4cb454fcb37e";
 
   List<WorkoutDay> get workoutDays {
     return [..._workoutProgram.workoutDays];
   }
 
   String get durationS {
-    return "${_workoutProgram.duration} ${_workoutProgram.durationString}";
+    return "${_workoutProgram.duration} ${_workoutProgram.duration}";
   }
 
   String get startS {
@@ -42,5 +45,35 @@ class WorkoutProvider with ChangeNotifier {
       wDay.lWorkoutExercise[iExActive].active = false;
       notifyListeners();
     }
+  }
+
+  Future<void> fetchWorkoutProgram() async {
+    final url =
+        "http://192.168.1.17:8080/api/v1/workoutprogram/active/$_authToken";
+    final response = await http.get(url);
+    final jsonWP = json.decode(response.body);
+
+    final workOutDays = (jsonWP["workoutDayList"] as List<dynamic>)
+        .map(
+          (workoutDay) => WorkoutDay(
+              id: workoutDay["id"],
+              title: workoutDay["title"],
+              description: workoutDay["description"],
+              order: int.parse(workoutDay["showOrder"]),
+              lWorkoutExercise: (workoutDay["workoutExerciseList"] as List<dynamic>)
+                  .map((workoutExercise) => WorkoutExercise(
+                      id: workoutExercise["id"],
+                      reps: workoutExercise["reps"],
+                      pause: workoutExercise["pause"]))
+                  .toList()),
+        )
+        .toList();
+
+    final workoutProgram = WorkoutProgram(
+        id: jsonWP["id"],
+        duration: "${jsonWP["duration"]} ${jsonWP["durationType"]}",
+        start: DateTime.parse(jsonWP["start"]),
+        workoutDays: workOutDays);
+    _workoutProgram = workoutProgram;
   }
 }
