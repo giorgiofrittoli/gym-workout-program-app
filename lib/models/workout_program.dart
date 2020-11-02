@@ -11,9 +11,18 @@ class WorkoutProgram with ChangeNotifier {
   List<WorkoutDay> workoutDays;
 
   WorkoutProgram(
-      {this.id,
-      this.start,
-      this.duration,
-      this.user,
-      this.workoutDays});
+      {this.id, this.start, this.duration, this.user, this.workoutDays});
+
+  static WorkoutProgram parseWPJson(Map<String, dynamic> data) {
+    return WorkoutProgram(
+      id: data["id"],
+      duration: "${data["duration"]} ${data["durationType"]}",
+      start: DateTime.parse(data["start"]),
+      workoutDays: (data["workoutDayList"] as List<dynamic>)
+          .map(
+            (dataWorkoutDay) => WorkoutDay.parseWDJson(dataWorkoutDay),
+          )
+          .toList(),
+    );
+  }
 }

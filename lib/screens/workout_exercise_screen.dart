@@ -10,7 +10,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
         ModalRoute.of(context).settings.arguments as WorkoutExercise;
     return Scaffold(
       appBar: AppBar(
-        title: Text("${workoutExercise.exercise.title}"),
+        title: Text("${workoutExercise.exercise.name}"),
       ),
       body: Container(
         margin: EdgeInsets.all(10),

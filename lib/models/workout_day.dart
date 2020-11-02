@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:gym_workout_program/models/workout_exercise.dart';
-import 'package:gym_workout_program/models/workout_program.dart';
-
-import 'workout_program.dart';
 
 class WorkoutDay {
   final String id;
@@ -20,4 +16,18 @@ class WorkoutDay {
     this.lWorkoutExercise,
     this.active = false,
   });
+
+  static WorkoutDay parseWDJson(Map<String, dynamic> data) {
+    return WorkoutDay(
+      id: data["id"],
+      title: data["title"],
+      description: data["description"],
+      order: int.parse(data["showOrder"]),
+      lWorkoutExercise: (data["workoutExerciseList"] as List<dynamic>)
+          .map(
+            (workoutExercise) => WorkoutExercise.parseWEJson(workoutExercise),
+          )
+          .toList(),
+    );
+  }
 }

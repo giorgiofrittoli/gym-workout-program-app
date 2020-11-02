@@ -36,9 +36,9 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                           width: 50,
                           heigth: 50,
                         )
-                      : Text(widget.workoutExercise.exercise.title),
+                      : Text(widget.workoutExercise.exercise.name),
                   title: !_expanded && !widget.workoutExercise.active
-                      ? Text(widget.workoutExercise.exercise.title)
+                      ? Text(widget.workoutExercise.exercise.name)
                       : Text(""),
                   trailing: widget.workoutExercise.active
                       ? IconButton(
