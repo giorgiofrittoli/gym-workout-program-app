@@ -5,9 +5,11 @@ import "../providers/workout_provider.dart";
 import '../widgets/workout_program_item.dart';
 
 class WorkoutProgramScreen extends StatelessWidget {
-
-  Future<void> _fetchWorkoutProgram(BuildContext context){
-    return Provider.of<WorkoutProvider>(context).fetchWorkoutProgram();
+  Future<void> _fetchWorkoutProgram(BuildContext context) {
+    return Provider.of<WorkoutProvider>(
+      context,
+      listen: false,
+    ).fetchWorkoutProgram();
   }
 
   @override

@@ -1,6 +1,7 @@
 import "dart:convert";
 
 import 'package:flutter/material.dart';
+import 'package:gym_workout_program/helpers/server_helper.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
 import "package:http/http.dart" as http;
 import "package:intl/intl.dart";
@@ -9,7 +10,10 @@ import '../models/workout_program.dart';
 
 class WorkoutProvider with ChangeNotifier {
   WorkoutProgram _workoutProgram;
-  String _authToken = "e4594ccc-aaab-4324-b058-29213ebb4355";
+  String _authToken =
+      "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.2Bv2LlrmEmq3JWRKIcHFHEMyON-gxHRq0x06wotiB7snGJRHjaFsyo_P35rZC04TC5exQhiMQBWIrMxdFTfh9g";
+  String _userId = "e4594ccc-aaab-4324-b058-29213ebb4355";
+  final apiUrl = "${ServerHelper.baseApiUrl}/workoutprogram";
 
   List<WorkoutDay> get workoutDays {
     return [..._workoutProgram.workoutDays];
@@ -47,9 +51,13 @@ class WorkoutProvider with ChangeNotifier {
   }
 
   Future<void> fetchWorkoutProgram() async {
-    final url =
-        "http://192.168.1.17:8080/api/v1/workoutprogram/active/$_authToken";
-    final response = await http.get(url);
+    final response = await http.get(
+      "$apiUrl/active/$_userId",
+      headers: {
+        "Authorization": _authToken,
+      },
+    );
+
     final jsonWP = json.decode(response.body);
 
     _workoutProgram = WorkoutProgram.parseWPJson(jsonWP);
