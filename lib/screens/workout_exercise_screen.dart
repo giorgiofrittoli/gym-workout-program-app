@@ -38,6 +38,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                     softWrap: true,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
+                  SizedBox(height: 10),
                   Text(
                     "Ripetizioni:",
                     style: Theme.of(context).textTheme.headline6,
