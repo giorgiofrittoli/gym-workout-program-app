@@ -9,11 +9,17 @@ import "package:intl/intl.dart";
 import '../models/workout_program.dart';
 
 class WorkoutProvider with ChangeNotifier {
-  WorkoutProgram _workoutProgram;
-  String _authToken =
-      "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.2Bv2LlrmEmq3JWRKIcHFHEMyON-gxHRq0x06wotiB7snGJRHjaFsyo_P35rZC04TC5exQhiMQBWIrMxdFTfh9g";
-  String _userId = "e4594ccc-aaab-4324-b058-29213ebb4355";
   final apiUrl = "${ServerHelper.baseApiUrl}/workoutprogram";
+
+  WorkoutProgram _workoutProgram;
+  String _authToken;
+  String _userId;
+
+  WorkoutProvider(this._workoutProgram, this._authToken, this._userId);
+
+  WorkoutProgram get workoutProgram {
+    return _workoutProgram;
+  }
 
   List<WorkoutDay> get workoutDays {
     return [..._workoutProgram.workoutDays];
