@@ -15,6 +15,10 @@ class AuthProvider with ChangeNotifier {
     return _authToken;
   }
 
+  User get user {
+    return _user;
+  }
+
   String get userId {
     return _user != null ? _user.id : null;
   }
@@ -36,6 +40,12 @@ class AuthProvider with ChangeNotifier {
     final respBody = json.decode(response.body);
     _user = User.parseUJSon(respBody);
     _authToken = response.headers["authorization"];
+    notifyListeners();
+  }
+
+  Future<void> logout() {
+    _authToken = null;
+    _user = null;
     notifyListeners();
   }
 }

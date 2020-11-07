@@ -3,6 +3,7 @@ import "package:provider/provider.dart";
 
 import "../providers/workout_provider.dart";
 import '../widgets/workout_program_item.dart';
+import "../widgets/app_drawer.dart";
 
 class WorkoutProgramScreen extends StatelessWidget {
   Future<void> _fetchWorkoutProgram(BuildContext context) {
@@ -60,6 +61,7 @@ class WorkoutProgramScreen extends StatelessWidget {
           }
         },
       ),
+      drawer: AppDrawer(),
     );
   }
 }
