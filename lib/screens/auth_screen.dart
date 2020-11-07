@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
 
-import "../models/http_exception.dart";
 import "../providers/auth_provider.dart";
 
 class AuthScreen extends StatefulWidget {
@@ -18,7 +17,6 @@ class _AuthScreenState extends State {
   };
 
   var _isLoading = false;
-  var _validUsername = true;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -53,16 +51,14 @@ class _AuthScreenState extends State {
         _authData['email'],
         _authData['password'],
       );
-    } on HttpException catch (error) {
-      //_showErrorDialog(error.toString());
     } catch (error) {
+      print(error);
       const errorMessage =
           'Could not authenticate you. Please try again later.';
       _showErrorDialog(errorMessage);
     }
 
     setState(() {
-      _validUsername = false;
       _isLoading = false;
     });
   }
@@ -99,8 +95,6 @@ class _AuthScreenState extends State {
                             TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'E-Mail',
-                                errorText:
-                                    _validUsername ? null : "Invalid username",
                               ),
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {

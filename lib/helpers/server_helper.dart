@@ -16,7 +16,7 @@ class ServerHelper {
       headers: {"Content-Type": "application/json"},
       body: jsonBody,
     );
-    if (response.statusCode != 200 || response.statusCode != 403) {
+    if (response.statusCode != 200 && response.statusCode != 403) {
       throw GenericServerError();
     } else if (response.statusCode == 403) {
       final errors = (json.decode(response.body))["errors"];

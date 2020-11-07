@@ -3,10 +3,11 @@ import "dart:convert";
 import 'package:flutter/material.dart';
 
 import "../helpers/server_helper.dart";
+import "../models/user.dart";
 
 class AuthProvider with ChangeNotifier {
   String _authToken;
-  String _userId;
+  User _user;
 
   final apiUrl = "${ServerHelper.baseApiUrl}/users";
 
@@ -15,7 +16,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   String get userId {
-    return _userId;
+    return _user != null ? _user.id : null;
   }
 
   bool get isAuth {
@@ -33,7 +34,7 @@ class AuthProvider with ChangeNotifier {
       ),
     );
     final respBody = json.decode(response.body);
-    _userId = respBody["userId"];
+    _user = User.parseUJSon(respBody);
     _authToken = response.headers["authorization"];
     notifyListeners();
   }
