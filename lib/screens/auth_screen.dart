@@ -18,6 +18,7 @@ class _AuthScreenState extends State {
   };
 
   var _isLoading = false;
+  var _validUsername = true;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -38,10 +39,10 @@ class _AuthScreenState extends State {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState.validate()) {
-      // Invalid!
-      return;
-    }
+    // if (!_formKey.currentState.validate()) {
+    //   // Invalid!
+    //   return;
+    // }
     _formKey.currentState.save();
     setState(() {
       _isLoading = true;
@@ -53,7 +54,7 @@ class _AuthScreenState extends State {
         _authData['password'],
       );
     } on HttpException catch (error) {
-      _showErrorDialog(error.toString());
+      //_showErrorDialog(error.toString());
     } catch (error) {
       const errorMessage =
           'Could not authenticate you. Please try again later.';
@@ -61,12 +62,14 @@ class _AuthScreenState extends State {
     }
 
     setState(() {
+      _validUsername = false;
       _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -74,67 +77,75 @@ class _AuthScreenState extends State {
       elevation: 8.0,
       child: Scaffold(
         body: Container(
+          width: double.infinity,
+          height: deviceSize.height,
           margin: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 100,
-              ),
-              Card(
-                elevation: 2,
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'E-Mail'),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _authData['email'] = value;
-                            },
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Password'),
-                            obscureText: true,
-                            validator: (value) {
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _authData['password'] = value;
-                            },
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          if (_isLoading)
-                            CircularProgressIndicator()
-                          else
-                            RaisedButton(
-                              child: Text('LOGIN'),
-                              onPressed: _submit,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                ),
+                Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'E-Mail',
+                                errorText:
+                                    _validUsername ? null : "Invalid username",
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 8.0),
-                              color: Theme.of(context).primaryColor,
-                              textColor:
-                                  Theme.of(context).primaryTextTheme.button.color,
+                              keyboardType: TextInputType.emailAddress,
+                              onSaved: (value) {
+                                _authData['email'] = value;
+                              },
                             ),
-                        ],
+                            TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Password'),
+                              obscureText: true,
+                              validator: (value) {
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _authData['password'] = value;
+                              },
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            if (_isLoading)
+                              CircularProgressIndicator()
+                            else
+                              RaisedButton(
+                                child: Text('LOGIN'),
+                                onPressed: _submit,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 8.0),
+                                color: Theme.of(context).primaryColor,
+                                textColor: Theme.of(context)
+                                    .primaryTextTheme
+                                    .button
+                                    .color,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
