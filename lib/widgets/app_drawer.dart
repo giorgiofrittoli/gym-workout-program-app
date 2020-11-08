@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
+import "../screens/user_profile_screen.dart";
+import "../screens/workout_program_screen.dart";
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -16,6 +18,31 @@ class AppDrawer extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).accentColor,
               ),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.folder_shared_sharp),
+              title: Text(
+                "Scheda",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(WorkoutProgramScreen.routeName);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text(
+                "Profilo utente",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
+              },
             ),
             Divider(),
             ListTile(

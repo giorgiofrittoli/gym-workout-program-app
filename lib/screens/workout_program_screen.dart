@@ -6,6 +6,9 @@ import "../widgets/app_drawer.dart";
 import '../widgets/workout_program_item.dart';
 
 class WorkoutProgramScreen extends StatelessWidget {
+
+  static const routeName = "workout-program";
+
   Future<void> _fetchWorkoutProgram(BuildContext context) {
     return Provider.of<WorkoutProvider>(
       context,
@@ -32,9 +35,9 @@ class WorkoutProgramScreen extends StatelessWidget {
             return Consumer<WorkoutProvider>(
               builder: (ctx, workoutProgram, child) => Container(
                 padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
                 child: Column(
                   children: [
+                    SizedBox(height: 20),
                     Text(
                       "Data inizio: ${workoutProgram.startS}",
                       style: Theme.of(context).textTheme.subtitle1,
@@ -44,7 +47,7 @@ class WorkoutProgramScreen extends StatelessWidget {
                       "Durata: ${workoutProgram.durationS}",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 20),
                     Divider(thickness: 2,color: Colors.white,),
                     SizedBox(height: 10),
                     Container(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gym_workout_program/models/workout_program.dart';
 import "package:provider/provider.dart";
 
 import "./providers/auth_provider.dart";
 import "./providers/workout_provider.dart";
 import './screens/auth_screen.dart';
+import "./screens/user_profile_screen.dart";
 import "./screens/workout_day_screen.dart";
 import './screens/workout_exercise_screen.dart';
 import './screens/workout_program_screen.dart';
@@ -40,6 +42,10 @@ class MyApp extends StatelessWidget {
                   fontSize: 16,
                   color: Colors.white,
                 ),
+                subtitle2: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
                 headline6: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -58,8 +64,10 @@ class MyApp extends StatelessWidget {
                           : AuthScreen(),
                 ),
           routes: {
+            WorkoutProgramScreen.routeName: (_) => WorkoutProgramScreen(),
             WorkoutDayScreen.routeName: (_) => WorkoutDayScreen(),
             WorkoutExcerciseScreen.routeName: (_) => WorkoutExcerciseScreen(),
+            UserProfileScreen.routeName: (_) => UserProfileScreen(),
           },
         ),
       ),

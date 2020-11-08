@@ -10,12 +10,7 @@ class ServerHelper {
   static const serverUrl = "http://192.168.1.60:8080";
   static const baseApiUrl = serverUrl + "/api/v1";
 
-  static Future<http.Response> post(String url, String jsonBody) async {
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonBody,
-    );
+  static http.Response _handleResponse(http.Response response) {
     if (response.statusCode != 200 && response.statusCode != 403) {
       throw GenericServerError();
     } else if (response.statusCode == 403) {
@@ -24,5 +19,27 @@ class ServerHelper {
     } else {
       return response;
     }
+  }
+
+  static Future<http.Response> post(String url, String jsonBody) async {
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonBody,
+    );
+    return _handleResponse(response);
+  }
+
+  static Future<http.Response> put(
+      String url, String jsonBody, String authToken) async {
+    final response = await http.put(
+      url,
+      headers: {
+        "Authorization": authToken,
+        "Content-Type": "application/json",
+      },
+      body: jsonBody,
+    );
+    return _handleResponse(response);
   }
 }

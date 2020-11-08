@@ -38,13 +38,7 @@ class AuthProvider with ChangeNotifier {
         },
       ),
     );
-    final respBody = json.decode(response.body);
-    _user = User.parseUJSon(respBody);
-    _authToken = response.headers["authorization"];
-    notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("auth_token", _authToken);
-    prefs.setString('userData', response.body);
+    _updateUser(response.body, response.headers["authorization"]);
   }
 
   Future<void> logout() async {
@@ -64,5 +58,25 @@ class AuthProvider with ChangeNotifier {
     _user = User.parseUJSon(json.decode(prefs.get("userData")));
     notifyListeners();
     return true;
+  }
+
+  Future<void> _updateUser(String jsonUser, String authToken) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final respBody = json.decode(jsonUser);
+    _user = User.parseUJSon(respBody);
+    prefs.setString('userData', jsonUser);
+
+    if (authToken.isNotEmpty) {
+      _authToken = authToken;
+      prefs.setString("auth_token", _authToken);
+    }
+    notifyListeners();
+  }
+
+  Future<void> updateUser(Map<String, String> userData) async {
+    final response =
+        await ServerHelper.put("$apiUrl/${_user.id}", json.encode(userData),_authToken);
+    _updateUser(response.body, "");
   }
 }
