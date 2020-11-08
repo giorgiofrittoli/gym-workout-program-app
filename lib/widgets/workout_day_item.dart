@@ -24,6 +24,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
       builder: (_, workoutProvider, _c) => Container(
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: Card(
+          color: Theme.of(context).accentColor,
           elevation: 2,
           child: Column(
             children: [
@@ -36,12 +37,16 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                           width: 50,
                           height: 50,
                         )
-                      : Text(widget.workoutExercise.exercise.name),
+                      : Text(
+                          widget.workoutExercise.exercise.name,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
                   title: !_expanded && !widget.workoutExercise.active
                       ? Text(widget.workoutExercise.exercise.name)
                       : Text(""),
                   trailing: widget.workoutExercise.active
                       ? IconButton(
+                          color: Colors.white,
                           icon: Icon(Icons.check),
                           onPressed: () => Provider.of<WorkoutProvider>(
                             context,
@@ -49,6 +54,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                           ).nextExercise(widget.idWorkoutDay),
                         )
                       : IconButton(
+                          color: Colors.white,
                           icon: Icon(_expanded || widget.workoutExercise.active
                               ? Icons.expand_less
                               : Icons.expand_more),

@@ -16,7 +16,7 @@ class WorkoutProgramScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
         title: Text("Workout program"),
         backgroundColor: Theme.of(context).accentColor,
@@ -44,8 +44,9 @@ class WorkoutProgramScreen extends StatelessWidget {
                       "Durata: ${workoutProgram.durationS}",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
-                    Divider(thickness: 2),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10,),
+                    Divider(thickness: 2,color: Colors.white,),
+                    SizedBox(height: 10),
                     Container(
                       height: 400,
                       child: ListView.builder(

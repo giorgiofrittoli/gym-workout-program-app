@@ -17,6 +17,7 @@ class WorkoutProgramItem extends StatelessWidget {
         onTap: () => Navigator.of(context)
             .pushNamed(WorkoutDayScreen.routeName, arguments: workoutDay.id),
         child: Card(
+          color: Theme.of(context).accentColor,
           margin: EdgeInsets.all(10),
           elevation: 2,
           child: Padding(

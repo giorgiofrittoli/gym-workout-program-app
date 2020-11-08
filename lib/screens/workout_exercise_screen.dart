@@ -9,7 +9,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
     final workoutExercise =
         ModalRoute.of(context).settings.arguments as WorkoutExercise;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
         title: Text("${workoutExercise.exercise.name}"),
         backgroundColor: Theme.of(context).accentColor,

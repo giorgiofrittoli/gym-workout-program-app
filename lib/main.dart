@@ -32,17 +32,18 @@ class MyApp extends StatelessWidget {
       child: Consumer<AuthProvider>(
         builder: (_, auth, _c) => MaterialApp(
           theme: ThemeData(
-            primaryColor: Colors.white,
-            accentColor: Colors.blue,
-            primarySwatch: Colors.blue,
+            primaryColorDark: Color.fromRGBO(21, 23, 21, 1),
+            accentColor: Color.fromRGBO(51, 54, 51, 1),
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: ThemeData.light().textTheme.copyWith(
+            textTheme: ThemeData.dark().textTheme.copyWith(
                 subtitle1: TextStyle(
                   fontSize: 16,
+                  color: Colors.white,
                 ),
                 headline6: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 )),
           ),
           title: 'Gym workout program',
