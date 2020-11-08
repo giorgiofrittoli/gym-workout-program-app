@@ -9,23 +9,25 @@ class WorkoutExcerciseScreen extends StatelessWidget {
     final workoutExercise =
         ModalRoute.of(context).settings.arguments as WorkoutExercise;
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text("${workoutExercise.exercise.name}"),
+        backgroundColor: Theme.of(context).accentColor,
       ),
-      body: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Card(
-              elevation: 2,
-              child: Image.network(
-                workoutExercise.exercise.imageURL,
-                fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Card(
+                elevation: 2,
+                child: Image.network(
+                  workoutExercise.exercise.imageURL,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            SingleChildScrollView(
-              child: Column(
+              SizedBox(height: 20),
+              Column(
                 children: [
                   Text(
                     "Descrizione:",
@@ -64,8 +66,8 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

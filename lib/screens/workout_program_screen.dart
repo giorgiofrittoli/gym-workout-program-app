@@ -2,8 +2,8 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
 import "../providers/workout_provider.dart";
-import '../widgets/workout_program_item.dart';
 import "../widgets/app_drawer.dart";
+import '../widgets/workout_program_item.dart';
 
 class WorkoutProgramScreen extends StatelessWidget {
   Future<void> _fetchWorkoutProgram(BuildContext context) {
@@ -16,8 +16,10 @@ class WorkoutProgramScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text("Workout program"),
+        backgroundColor: Theme.of(context).accentColor,
       ),
       body: FutureBuilder(
         future: _fetchWorkoutProgram(context),

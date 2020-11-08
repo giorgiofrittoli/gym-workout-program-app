@@ -34,7 +34,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                       ? WorkoutImage(
                           workoutExercise: widget.workoutExercise,
                           width: 50,
-                          heigth: 50,
+                          height: 50,
                         )
                       : Text(widget.workoutExercise.exercise.name),
                   title: !_expanded && !widget.workoutExercise.active
@@ -69,7 +69,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                       WorkoutImage(
                         workoutExercise: widget.workoutExercise,
                         width: 120,
-                        heigth: 100,
+                        height: 100,
                       ),
                       SingleChildScrollView(
                         child: Container(
@@ -110,12 +110,12 @@ class WorkoutImage extends StatelessWidget {
     Key key,
     @required this.workoutExercise,
     @required this.width,
-    @required this.heigth,
+    @required this.height,
   }) : super(key: key);
 
   final WorkoutExercise workoutExercise;
   final double width;
-  final double heigth;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -125,10 +125,22 @@ class WorkoutImage extends StatelessWidget {
           arguments: workoutExercise),
       child: Container(
         width: width,
-        height: heigth,
+        height: height,
         child: Image.network(
           workoutExercise.exercise.imageURL,
           fit: BoxFit.cover,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent loadingProgress) {
+            if (loadingProgress == null) return child;
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes
+                    : null,
+              ),
+            );
+          },
         ),
       ),
     );

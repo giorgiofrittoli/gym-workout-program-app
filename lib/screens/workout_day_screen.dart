@@ -17,8 +17,10 @@ class WorkoutDayScreen extends StatelessWidget {
     wProvider.resetExercices(id);
     final workoutDay = wProvider.workoutDay(id);
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text(workoutDay.title),
+        backgroundColor: Theme.of(context).accentColor,
       ),
       body: Container(
         child: ListView.builder(

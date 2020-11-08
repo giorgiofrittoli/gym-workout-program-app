@@ -72,6 +72,7 @@ class _AuthScreenState extends State {
       ),
       elevation: 8.0,
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         body: Container(
           width: double.infinity,
           height: deviceSize.height,

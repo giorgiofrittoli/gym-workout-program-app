@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
       child: Consumer<AuthProvider>(
         builder: (_, auth, _c) => MaterialApp(
           theme: ThemeData(
+            primaryColor: Colors.white,
+            accentColor: Colors.blue,
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: ThemeData.light().textTheme.copyWith(
