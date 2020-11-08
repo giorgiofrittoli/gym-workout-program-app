@@ -1,6 +1,7 @@
 import "dart:convert";
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import "../helpers/server_helper.dart";
 import "../models/user.dart";
@@ -41,11 +42,27 @@ class AuthProvider with ChangeNotifier {
     _user = User.parseUJSon(respBody);
     _authToken = response.headers["authorization"];
     notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("auth_token", _authToken);
+    prefs.setString('userData', response.body);
   }
 
-  Future<void> logout() {
+  Future<void> logout() async {
     _authToken = null;
     _user = null;
     notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
+  Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey("auth_token")) {
+      return false;
+    }
+    _authToken = prefs.get("auth_token");
+    _user = User.parseUJSon(json.decode(prefs.get("userData")));
+    notifyListeners();
+    return true;
   }
 }

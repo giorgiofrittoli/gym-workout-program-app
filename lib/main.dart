@@ -44,7 +44,16 @@ class MyApp extends StatelessWidget {
                 )),
           ),
           title: 'Gym workout program',
-          home: auth.isAuth ? WorkoutProgramScreen() : AuthScreen(),
+          home: auth.isAuth
+              ? WorkoutProgramScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? Center(child: CircularProgressIndicator())
+                          : AuthScreen(),
+                ),
           routes: {
             WorkoutDayScreen.routeName: (_) => WorkoutDayScreen(),
             WorkoutExcerciseScreen.routeName: (_) => WorkoutExcerciseScreen(),

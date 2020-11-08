@@ -11,7 +11,7 @@ class User {
       id: jsonData["id"],
       username: jsonData["username"],
       firstName: jsonData["firstName"],
-      lastName: jsonData["lastName: "],
+      lastName: jsonData["lastName"],
     );
   }
 }
