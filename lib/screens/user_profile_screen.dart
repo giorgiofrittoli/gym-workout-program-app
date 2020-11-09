@@ -3,6 +3,7 @@ import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
 import "../widgets/app_drawer.dart";
+import "../widgets/input_text.dart";
 
 class UserProfileScreen extends StatefulWidget {
   static const routeName = "/user-profile";
@@ -58,11 +59,36 @@ class _UserProfileScreenState extends State {
     super.didChangeDependencies();
   }
 
+  void _saveInput(field, value) {
+    _userData[field] = value;
+  }
+
+  String _validateUsername(String value) {
+    if (value.isEmpty) {
+      return "Inserire l'username";
+    }
+    return null;
+  }
+
+  String _validateFirstName(String value) {
+    if (value.isEmpty) {
+      return "Inserire il nome";
+    }
+    return null;
+  }
+
+  String _validateLastName(String value) {
+    if (value.isEmpty) {
+      return "Inserire il cognome";
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceInfo = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
         title: Text("Profilo utente"),
         backgroundColor: Theme.of(context).accentColor,
@@ -73,7 +99,7 @@ class _UserProfileScreenState extends State {
         child: _isLoading
             ? Center(child: CircularProgressIndicator())
             : Card(
-                color: Colors.black38,
+                color: Theme.of(context).accentColor,
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -81,71 +107,36 @@ class _UserProfileScreenState extends State {
                       padding: EdgeInsets.all(15),
                       child: Column(
                         children: [
-                          TextFormField(
-                            cursorColor: Colors.white,
-                            initialValue: _userData["username"],
-                            decoration: InputDecoration(
-                              labelText: 'Username',
-                              labelStyle: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            style: Theme.of(context).textTheme.subtitle2,
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value.isEmpty) return "Inserire l'ursername";
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userData["username"] = value;
-                            },
+                          InputText(
+                            field: "username",
+                            title: "Username",
+                            validator: _validateUsername,
+                            initValue: _userData["username"],
+                            savedInput: _saveInput,
                           ),
-                          TextFormField(
-                            cursorColor: Colors.white,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            style: Theme.of(context).textTheme.subtitle2,
-                            keyboardType: TextInputType.text,
-                            onSaved: (value) {
-                              _userData["password"] = value;
-                            },
+                          SizedBox(height: 15),
+                          InputText(
+                            field: "password",
+                            title: "Password",
+                            initValue: "",
+                            validator: null,
+                            savedInput: _saveInput,
                           ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            cursorColor: Colors.white,
-                            initialValue: _userData["firstName"],
-                            decoration: InputDecoration(
-                              labelText: 'Nome',
-                              labelStyle: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            style: Theme.of(context).textTheme.subtitle2,
-                            keyboardType: TextInputType.text,
-                            validator: (value) {
-                              if (value.isEmpty) return "Inserire il nome";
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userData["firstName"] = value;
-                            },
+                          SizedBox(height: 15),
+                          InputText(
+                            field: "firstName",
+                            title: "Nome",
+                            initValue: _userData["firstName"],
+                            validator: _validateFirstName,
+                            savedInput: _saveInput,
                           ),
-                          SizedBox(height: 10),
-                          TextFormField(
-                            cursorColor: Colors.white,
-                            initialValue: _userData["lastName"],
-                            decoration: InputDecoration(
-                              labelText: 'Cognome',
-                              labelStyle: Theme.of(context).textTheme.subtitle2,
-                            ),
-                            style: Theme.of(context).textTheme.subtitle2,
-                            keyboardType: TextInputType.text,
-                            validator: (value) {
-                              if (value.isEmpty) return "Inserire il cognome";
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _userData["lastName"] = value;
-                            },
+                          SizedBox(height: 15),
+                          InputText(
+                            field: "lastName",
+                            title: "Cognome",
+                            initValue: _userData["lastName"],
+                            validator: _validateLastName,
+                            savedInput: _saveInput,
                           ),
                         ],
                       ),
