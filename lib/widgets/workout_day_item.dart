@@ -22,49 +22,46 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
   Widget build(BuildContext context) {
     return Consumer<WorkoutProvider>(
       builder: (_, workoutProvider, _c) => Container(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         child: Card(
           color: Theme.of(context).accentColor,
           elevation: 2,
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: ListTile(
-                  leading: !_expanded && !widget.workoutExercise.active
-                      ? WorkoutImage(
-                          workoutExercise: widget.workoutExercise,
-                          width: 50,
-                          height: 50,
-                        )
-                      : Text(
-                          widget.workoutExercise.exercise.name,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                  title: !_expanded && !widget.workoutExercise.active
-                      ? Text(widget.workoutExercise.exercise.name)
-                      : Text(""),
-                  trailing: widget.workoutExercise.active
-                      ? IconButton(
-                          color: Colors.white,
-                          icon: Icon(Icons.check),
-                          onPressed: () => Provider.of<WorkoutProvider>(
-                            context,
-                            listen: false,
-                          ).nextExercise(widget.idWorkoutDay),
-                        )
-                      : IconButton(
-                          color: Colors.white,
-                          icon: Icon(_expanded || widget.workoutExercise.active
-                              ? Icons.expand_less
-                              : Icons.expand_more),
-                          onPressed: () {
-                            setState(() {
-                              _expanded = !_expanded;
-                            });
-                          },
-                        ),
-                ),
+              ListTile(
+                leading: !_expanded && !widget.workoutExercise.active
+                    ? WorkoutImage(
+                        workoutExercise: widget.workoutExercise,
+                        width: 50,
+                        height: 50,
+                      )
+                    : Text(
+                        widget.workoutExercise.exercise.name,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                title: !_expanded && !widget.workoutExercise.active
+                    ? Text(widget.workoutExercise.exercise.name)
+                    : Text(""),
+                trailing: widget.workoutExercise.active
+                    ? IconButton(
+                        color: Colors.white,
+                        icon: Icon(Icons.check),
+                        onPressed: () => Provider.of<WorkoutProvider>(
+                          context,
+                          listen: false,
+                        ).nextExercise(widget.idWorkoutDay),
+                      )
+                    : IconButton(
+                        color: Colors.white,
+                        icon: Icon(_expanded || widget.workoutExercise.active
+                            ? Icons.expand_less
+                            : Icons.expand_more),
+                        onPressed: () {
+                          setState(() {
+                            _expanded = !_expanded;
+                          });
+                        },
+                      ),
               ),
               if (widget.workoutExercise.active || _expanded)
                 Container(
@@ -140,6 +137,7 @@ class WorkoutImage extends StatelessWidget {
             if (loadingProgress == null) return child;
             return Center(
               child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                 value: loadingProgress.expectedTotalBytes != null
                     ? loadingProgress.cumulativeBytesLoaded /
                         loadingProgress.expectedTotalBytes

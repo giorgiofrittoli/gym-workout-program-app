@@ -37,10 +37,9 @@ class _AuthScreenState extends State {
   }
 
   Future<void> _submit() async {
-    // if (!_formKey.currentState.validate()) {
-    //   // Invalid!
-    //   return;
-    // }
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
     _formKey.currentState.save();
     setState(() {
       _isLoading = true;
@@ -145,10 +144,13 @@ class _AuthScreenState extends State {
         height: 40,
         decoration: BoxDecoration(
           color: Theme.of(context).accentColor,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(3),topRight: Radius.circular(3)),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(3), topRight: Radius.circular(3)),
         ),
-        child: Text("FRIGIR 2020",
-        textAlign: TextAlign.center,),
+        child: Text(
+          "FRIGIR 2020",
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
