@@ -12,7 +12,8 @@ class UserProfileScreen extends StatefulWidget {
   _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State {
+class _UserProfileScreenState extends State
+    with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   var _userData = {
@@ -45,6 +46,22 @@ class _UserProfileScreenState extends State {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      vsync: this,
+      initialIndex: 0,
+      length: 2,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   var _isInit = true;
 
   @override
@@ -65,6 +82,7 @@ class _UserProfileScreenState extends State {
 
   String _validateUsername(String value) {
     if (value.isEmpty) {
+      _tabController.animateTo(0);
       return "Inserire l'username";
     }
     return null;
@@ -72,6 +90,7 @@ class _UserProfileScreenState extends State {
 
   String _validateFirstName(String value) {
     if (value.isEmpty) {
+      _tabController.animateTo(1);
       return "Inserire il nome";
     }
     return null;
@@ -79,10 +98,13 @@ class _UserProfileScreenState extends State {
 
   String _validateLastName(String value) {
     if (value.isEmpty) {
+      _tabController.animateTo(1);
       return "Inserire il cognome";
     }
     return null;
   }
+
+  TabController _tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +115,17 @@ class _UserProfileScreenState extends State {
         title: Text("Profilo utente"),
         backgroundColor: Theme.of(context).accentColor,
       ),
+      bottomNavigationBar: TabBar(
+        controller: _tabController,
+        tabs: [
+          Tab(
+            text: "Utente",
+          ),
+          Tab(
+            text: "Persona",
+          ),
+        ],
+      ),
       body: Container(
         margin: EdgeInsets.all(5),
         height: deviceInfo.height,
@@ -102,45 +135,60 @@ class _UserProfileScreenState extends State {
                 color: Theme.of(context).accentColor,
                 child: Form(
                   key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          InputText(
-                            field: "username",
-                            title: "Username",
-                            validator: _validateUsername,
-                            initValue: _userData["username"],
-                            savedInput: _saveInput,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 30),
+                              InputText(
+                                field: "username",
+                                title: "Username",
+                                validator: _validateUsername,
+                                initValue: _userData["username"],
+                                savedInput: _saveInput,
+                              ),
+                              SizedBox(height: 30),
+                              InputText(
+                                field: "password",
+                                title: "Password",
+                                initValue: "",
+                                validator: null,
+                                savedInput: _saveInput,
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 15),
-                          InputText(
-                            field: "password",
-                            title: "Password",
-                            initValue: "",
-                            validator: null,
-                            savedInput: _saveInput,
-                          ),
-                          SizedBox(height: 15),
-                          InputText(
-                            field: "firstName",
-                            title: "Nome",
-                            initValue: _userData["firstName"],
-                            validator: _validateFirstName,
-                            savedInput: _saveInput,
-                          ),
-                          SizedBox(height: 15),
-                          InputText(
-                            field: "lastName",
-                            title: "Cognome",
-                            initValue: _userData["lastName"],
-                            validator: _validateLastName,
-                            savedInput: _saveInput,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 30),
+                              InputText(
+                                field: "firstName",
+                                title: "Nome",
+                                initValue: _userData["firstName"],
+                                validator: _validateFirstName,
+                                savedInput: _saveInput,
+                              ),
+                              SizedBox(height: 30),
+                              InputText(
+                                field: "lastName",
+                                title: "Cognome",
+                                initValue: _userData["lastName"],
+                                validator: _validateLastName,
+                                savedInput: _saveInput,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
