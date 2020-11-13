@@ -16,6 +16,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.all(10),
           margin: EdgeInsets.all(10),
           child: Column(
             children: [
@@ -26,7 +27,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20,),
               Column(
                 children: [
                   Text(
