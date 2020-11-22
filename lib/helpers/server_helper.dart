@@ -7,7 +7,7 @@ import "../models/generic_server_error_ex.dart";
 
 class ServerHelper {
   //static const serverUrl = "http://94.177.164.112:8080";
-  static const serverUrl = "http://192.168.1.100:8080";
+  static const serverUrl = "http://192.168.1.42:8080";
   static const baseApiUrl = serverUrl + "/api/v1";
 
   static http.Response _handleResponse(http.Response response) {
