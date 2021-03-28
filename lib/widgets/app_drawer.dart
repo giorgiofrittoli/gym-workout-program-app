@@ -10,6 +10,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
+        color: Theme.of(context).accentColor,
         child: Column(
           children: [
             Consumer<AuthProvider>(
@@ -19,13 +20,13 @@ class AppDrawer extends StatelessWidget {
                 backgroundColor: Theme.of(context).accentColor,
               ),
             ),
-            Divider(),
+            Divider(height: 20,),
             ListTile(
-              leading: Icon(Icons.folder_shared_sharp),
+              leading: Icon(Icons.folder_shared_sharp,color: Theme.of(context).primaryIconTheme.color,),
               title: Text(
                 "Scheda",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               onTap: () {
@@ -33,24 +34,24 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
+              leading: Icon(Icons.person,color: Theme.of(context).primaryIconTheme.color,),
               title: Text(
                 "Profilo utente",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
-            Divider(),
+            Divider(color: Colors.white,thickness: 0.5),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
+              leading: Icon(Icons.exit_to_app,color: Theme.of(context).primaryIconTheme.color,),
               title: Text(
                 "Logout",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               onTap: () {

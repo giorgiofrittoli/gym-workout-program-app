@@ -18,6 +18,11 @@ class WorkoutExcerciseScreen extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(10),
           margin: EdgeInsets.all(10),
+          decoration: new BoxDecoration(
+            color: Theme.of(context).accentColor,
+            borderRadius: new BorderRadius.all(const Radius.circular(10.0),
+            )
+          ),
           child: Column(
             children: [
               Card(
