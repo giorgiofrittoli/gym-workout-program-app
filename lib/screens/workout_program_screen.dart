@@ -10,10 +10,11 @@ class WorkoutProgramScreen extends StatelessWidget {
   static const routeName = "workout-program";
 
   Future<void> _fetchWorkoutProgram(BuildContext context) {
+
     return Provider.of<WorkoutProvider>(
       context,
       listen: false,
-    ).fetchWorkoutProgram();
+    ).fetchWorkoutPrograms();
   }
 
   @override

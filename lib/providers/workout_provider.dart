@@ -3,7 +3,6 @@ import "dart:convert";
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/helpers/server_helper.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
-import "package:http/http.dart" as http;
 import "package:intl/intl.dart";
 
 import '../models/workout_program.dart';
@@ -12,6 +11,7 @@ class WorkoutProvider with ChangeNotifier {
   final apiUrl = "${ServerHelper.baseApiUrl}/workoutprogram";
 
   WorkoutProgram _workoutProgram;
+  List<WorkoutProgram> _oldWorkoutPrograms;
   String _authToken;
   String _userId;
 
@@ -56,17 +56,16 @@ class WorkoutProvider with ChangeNotifier {
     }
   }
 
-  Future<void> fetchWorkoutProgram() async {
-    final response = await http.get(
-      "$apiUrl/active/$_userId",
-      headers: {
-        "Authorization": _authToken,
-      },
-    );
+  Future<void> fetchWorkoutPrograms() async {
+    final response = await ServerHelper.get("$apiUrl/$_userId", _authToken);
 
-    final jsonWP = json.decode(response.body);
+    var _workoutPrograms =
+        WorkoutProgram.jsonWPListToDto(json.decode(response.body));
 
-    _workoutProgram = WorkoutProgram.parseWPJson(jsonWP);
+    _workoutProgram = _workoutPrograms.firstWhere((wp) => wp.end == null);
+
+    _oldWorkoutPrograms =
+        _workoutPrograms.where((wp) => wp.end == null).toList();
 
     notifyListeners();
   }

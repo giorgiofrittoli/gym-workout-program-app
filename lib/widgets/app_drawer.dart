@@ -45,6 +45,18 @@ class AppDrawer extends StatelessWidget {
                 Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
+            ListTile(
+              leading: Icon(Icons.view_list,color: Theme.of(context).primaryIconTheme.color,),
+              title: Text(
+                "Archivio schede",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
+              },
+            ),
             Divider(color: Colors.white,thickness: 0.5),
             ListTile(
               leading: Icon(Icons.exit_to_app,color: Theme.of(context).primaryIconTheme.color,),
