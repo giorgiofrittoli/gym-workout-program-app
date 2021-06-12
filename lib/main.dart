@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_workout_program/models/workout_program.dart';
+import 'package:gym_workout_program/screens/dashboard_screen.dart';
 import "package:provider/provider.dart";
 
 import "./providers/auth_provider.dart";
@@ -8,7 +8,6 @@ import './screens/auth_screen.dart';
 import "./screens/user_profile_screen.dart";
 import "./screens/workout_day_screen.dart";
 import './screens/workout_exercise_screen.dart';
-import './screens/workout_program_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,10 +32,12 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (_, auth, _c) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primaryColorDark: Color.fromRGBO(3, 3, 3, 1),
             accentColor: Color.fromRGBO(33, 33, 33, 1),
-            primaryIconTheme: IconThemeData(color: Color.fromRGBO(170, 170, 170, 1)),
+            primaryIconTheme:
+                IconThemeData(color: Color.fromRGBO(170, 170, 170, 1)),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: ThemeData.dark().textTheme.copyWith(
                 subtitle1: TextStyle(
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
           ),
           title: 'Gym workout program',
           home: auth.isAuth
-              ? WorkoutProgramScreen()
+              ? DashboardScreen()
               : FutureBuilder(
                   future: auth.tryAutoLogin(),
                   builder: (ctx, authResultSnapshot) =>
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
                           : AuthScreen(),
                 ),
           routes: {
-            WorkoutProgramScreen.routeName: (_) => WorkoutProgramScreen(),
+            DashboardScreen.routeName: (_) => DashboardScreen(),
             WorkoutDayScreen.routeName: (_) => WorkoutDayScreen(),
             WorkoutExcerciseScreen.routeName: (_) => WorkoutExcerciseScreen(),
             UserProfileScreen.routeName: (_) => UserProfileScreen(),

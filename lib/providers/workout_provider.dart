@@ -1,4 +1,5 @@
 import "dart:convert";
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/helpers/server_helper.dart';
@@ -23,14 +24,6 @@ class WorkoutProvider with ChangeNotifier {
 
   List<WorkoutDay> get workoutDays {
     return [..._workoutProgram.workoutDays];
-  }
-
-  String get durationS {
-    return "${_workoutProgram.duration}";
-  }
-
-  String get startS {
-    return DateFormat("dd-MM-yyyy").format(_workoutProgram.start);
   }
 
   WorkoutDay workoutDay(String id) {
@@ -60,12 +53,18 @@ class WorkoutProvider with ChangeNotifier {
     final response = await ServerHelper.get("$apiUrl/$_userId", _authToken);
 
     var _workoutPrograms =
-        WorkoutProgram.jsonWPListToDto(json.decode(response.body));
+        WorkoutProgram.toModelList(json.decode(response.body));
+
+    log("Wokout programs " + _workoutPrograms.toString());
 
     _workoutProgram = _workoutPrograms.firstWhere((wp) => wp.end == null);
 
+    log("Active workout program " + _workoutProgram.toString());
+
     _oldWorkoutPrograms =
         _workoutPrograms.where((wp) => wp.end == null).toList();
+
+    log("Old workout programs " + _oldWorkoutPrograms.toString());
 
     notifyListeners();
   }

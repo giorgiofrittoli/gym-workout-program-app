@@ -6,6 +6,11 @@ class Exercise {
 
   Exercise({this.id, this.name, this.description, this.imageURL});
 
+  @override
+  String toString() {
+    return 'Exercise{id: $id, name: $name, description: $description, imageURL: $imageURL}';
+  }
+
   static Exercise parseEJson(Map<String, dynamic> data) {
     return Exercise(
       id: data["id"],

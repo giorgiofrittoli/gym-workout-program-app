@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
+import 'package:gym_workout_program/screens/dashboard_screen.dart';
 import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
 import "../screens/user_profile_screen.dart";
-import "../screens/workout_program_screen.dart";
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -20,21 +20,30 @@ class AppDrawer extends StatelessWidget {
                 backgroundColor: Theme.of(context).accentColor,
               ),
             ),
-            Divider(height: 20,),
+            Divider(
+              height: 20,
+            ),
             ListTile(
-              leading: Icon(Icons.folder_shared_sharp,color: Theme.of(context).primaryIconTheme.color,),
+              leading: Icon(
+                Icons.folder_shared_sharp,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
               title: Text(
-                "Scheda",
+                "Dashboard",
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(WorkoutProgramScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(DashboardScreen.routeName);
               },
             ),
             ListTile(
-              leading: Icon(Icons.person,color: Theme.of(context).primaryIconTheme.color,),
+              leading: Icon(
+                Icons.person,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
               title: Text(
                 "Profilo utente",
                 style: TextStyle(
@@ -42,11 +51,15 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
             ListTile(
-              leading: Icon(Icons.view_list,color: Theme.of(context).primaryIconTheme.color,),
+              leading: Icon(
+                Icons.view_list,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
               title: Text(
                 "Archivio schede",
                 style: TextStyle(
@@ -54,12 +67,16 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(UserProfileScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(UserProfileScreen.routeName);
               },
             ),
-            Divider(color: Colors.white,thickness: 0.5),
+            Divider(color: Colors.white, thickness: 0.5),
             ListTile(
-              leading: Icon(Icons.exit_to_app,color: Theme.of(context).primaryIconTheme.color,),
+              leading: Icon(
+                Icons.exit_to_app,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
               title: Text(
                 "Logout",
                 style: TextStyle(

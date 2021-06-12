@@ -7,7 +7,7 @@ import '../models/exceptions/generic_server_error_ex.dart';
 
 class ServerHelper {
   //static const serverUrl = "http://94.177.164.112:8080";
-  static const serverUrl = "http://192.168.34.42:8080";
+  static const serverUrl = "http://192.168.1.50:8080";
   static const baseApiUrl = serverUrl + "/api/v1";
 
   static http.Response _handleResponse(http.Response response) {
@@ -23,7 +23,7 @@ class ServerHelper {
 
   static Future<http.Response> post(String url, String jsonBody) async {
     final response = await http.post(
-      url,
+      Uri.parse(url),
       headers: {"Content-Type": "application/json"},
       body: jsonBody,
     );
@@ -33,7 +33,7 @@ class ServerHelper {
   static Future<http.Response> put(
       String url, String jsonBody, String authToken) async {
     final response = await http.put(
-      url,
+      Uri.parse(url),
       headers: {
         "Authorization": authToken,
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class ServerHelper {
 
   static Future<http.Response> get(String url, String authToken) async {
     final response = await http.get(
-      url,
+      Uri.parse(url),
       headers: {
         "Authorization": authToken,
         "Content-Type": "application/json",

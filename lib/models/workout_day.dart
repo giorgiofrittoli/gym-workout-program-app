@@ -17,6 +17,11 @@ class WorkoutDay {
     this.active = false,
   });
 
+  @override
+  String toString() {
+    return 'WorkoutDay{id: $id, title: $title, description: $description, order: $order, lWorkoutExercise: $lWorkoutExercise, active: $active}';
+  }
+
   static WorkoutDay parseWDJson(Map<String, dynamic> data) {
     return WorkoutDay(
       id: data["id"],

@@ -75,7 +75,7 @@ class _AuthScreenState extends State {
           child: Column(
             children: [
               Container(
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 height: 200,
               ),
               Card(

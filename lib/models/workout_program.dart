@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/models/workout_day.dart';
+import 'package:intl/intl.dart';
 
 import 'user.dart';
 
@@ -26,7 +27,16 @@ class WorkoutProgram with ChangeNotifier {
       return DateTime.parse(sDate);
   }
 
-  static WorkoutProgram jsonWPToDto(Map<String, dynamic> data) {
+  String get startS {
+    return DateFormat("dd-MM-yyyy").format(start);
+  }
+
+  @override
+  String toString() {
+    return 'WorkoutProgram{id: $id, start: $start, end: $end, duration: $duration, user: $user, workoutDays: $workoutDays}';
+  }
+
+  static WorkoutProgram toModel(Map<String, dynamic> data) {
     return WorkoutProgram(
       id: data["id"],
       duration: "${data["duration"]} ${data["durationType"]}",
@@ -40,7 +50,7 @@ class WorkoutProgram with ChangeNotifier {
     );
   }
 
-  static List<WorkoutProgram> jsonWPListToDto(List<dynamic> data) {
-    return data.map((e) => WorkoutProgram.jsonWPToDto(e)).toList();
+  static List<WorkoutProgram> toModelList(List<dynamic> data) {
+    return data.map((e) => WorkoutProgram.toModel(e)).toList();
   }
 }

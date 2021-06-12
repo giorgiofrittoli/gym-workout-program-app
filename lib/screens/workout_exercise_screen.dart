@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:gym_workout_program/helpers/widget_helper.dart';
 import 'package:gym_workout_program/models/workout_exercise.dart';
 
 class WorkoutExcerciseScreen extends StatelessWidget {
@@ -6,6 +7,8 @@ class WorkoutExcerciseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mq = MediaQuery.of(context);
+
     final workoutExercise =
         ModalRoute.of(context).settings.arguments as WorkoutExercise;
     return Scaffold(
@@ -16,13 +19,14 @@ class WorkoutExcerciseScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
+          height: WidgetHelper.calcHeight(1, mq, hasNavbar: false),
           padding: EdgeInsets.all(10),
           margin: EdgeInsets.all(10),
           decoration: new BoxDecoration(
-            color: Theme.of(context).accentColor,
-            borderRadius: new BorderRadius.all(const Radius.circular(10.0),
-            )
-          ),
+              color: Theme.of(context).accentColor,
+              borderRadius: new BorderRadius.all(
+                const Radius.circular(10.0),
+              )),
           child: Column(
             children: [
               Card(
@@ -32,7 +36,9 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Column(
                 children: [
                   Text(
