@@ -37,10 +37,10 @@ class _AuthScreenState extends State {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState.validate()) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
-    _formKey.currentState.save();
+    _formKey.currentState!.save();
     setState(() {
       _isLoading = true;
     });
@@ -93,7 +93,7 @@ class _AuthScreenState extends State {
                             ),
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {
-                              _authData['email'] = value;
+                              _authData['email'] = value!;
                             },
                             style: TextStyle(color: Colors.black),
                           ),
@@ -104,7 +104,7 @@ class _AuthScreenState extends State {
                               return null;
                             },
                             onSaved: (value) {
-                              _authData['password'] = value;
+                              _authData['password'] = value!;
                             },
                             style: TextStyle(color: Colors.black),
                           ),
@@ -125,7 +125,7 @@ class _AuthScreenState extends State {
                               color: Theme.of(context).primaryColor,
                               textColor: Theme.of(context)
                                   .primaryTextTheme
-                                  .button
+                                  .button!
                                   .color,
                             ),
                         ],

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class InputText extends StatelessWidget {
   final String field;
   final String title;
-  final String initValue;
-  final Function validator;
+  final String? initValue;
+  final Function? validator;
   final Function savedInput;
 
   InputText({
-    @required this.field,
-    @required this.title,
-    @required this.initValue,
-    @required this.validator,
-    @required this.savedInput,
+    required this.field,
+    required this.title,
+    required this.initValue,
+    required this.validator,
+    required this.savedInput,
   });
 
   @override
@@ -26,13 +26,13 @@ class InputText extends StatelessWidget {
         focusedErrorBorder: InputFormBorder.build(Colors.red, 2),
         errorBorder: InputFormBorder.build(Colors.red, 2),
         enabledBorder: InputFormBorder.build(Colors.white, 1),
-        focusedBorder: InputFormBorder.build(Colors.blue, 2),
+        focusedBorder: InputFormBorder.build(Colors.green, 2),
         labelText: title,
         labelStyle: Theme.of(context).textTheme.subtitle1,
       ),
       style: Theme.of(context).textTheme.subtitle2,
       keyboardType: TextInputType.emailAddress,
-      validator: (value) => validator != null ? validator(value) : null,
+      validator: (value) => validator != null ? validator!(value) : null,
       onSaved: (value) => savedInput(field, value),
     );
   }

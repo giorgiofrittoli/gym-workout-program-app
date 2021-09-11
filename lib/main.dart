@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_workout_program/screens/dashboard_screen.dart';
 import "package:provider/provider.dart";
 
 import "./providers/auth_provider.dart";
@@ -8,6 +7,7 @@ import './screens/auth_screen.dart';
 import "./screens/user_profile_screen.dart";
 import "./screens/workout_day_screen.dart";
 import './screens/workout_exercise_screen.dart';
+import '../screens/dashboard_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthProvider(),
         ),
         ChangeNotifierProxyProvider<AuthProvider, WorkoutProvider>(
-          create: null,
+          create: (ctx) => WorkoutProvider(null, null, null),
           update: (_, auth, prevWorkProvider) => WorkoutProvider(
             prevWorkProvider != null ? prevWorkProvider.workoutProgram : null,
             auth.authToken,
@@ -34,10 +34,16 @@ class MyApp extends StatelessWidget {
         builder: (_, auth, _c) => MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primaryColorDark: Color.fromRGBO(3, 3, 3, 1),
-            accentColor: Color.fromRGBO(33, 33, 33, 1),
-            primaryIconTheme:
-                IconThemeData(color: Color.fromRGBO(170, 170, 170, 1)),
+            appBarTheme: AppBarTheme(
+              //systemOverlayStyle: SystemUiOverlayStyle.dark,
+              backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: Colors.green,
+            ),
+            primaryIconTheme: IconThemeData(
+              color: Colors.green,
+            ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: ThemeData.dark().textTheme.copyWith(
                 subtitle1: TextStyle(
@@ -53,6 +59,10 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 )),
+            colorScheme: ColorScheme.dark().copyWith(
+              primary: Color.fromRGBO(0, 0, 0, 1),
+              secondary: Color.fromRGBO(33, 33, 33, 1),
+            ),
           ),
           title: 'Gym workout program',
           home: auth.isAuth

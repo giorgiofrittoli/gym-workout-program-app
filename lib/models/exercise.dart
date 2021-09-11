@@ -1,8 +1,8 @@
 class Exercise {
-  final String id;
-  final String name;
-  final String description;
-  final String imageURL;
+  final String? id;
+  final String? name;
+  final String? description;
+  final String? imageURL;
 
   Exercise({this.id, this.name, this.description, this.imageURL});
 

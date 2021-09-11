@@ -1,11 +1,11 @@
 import 'exercise.dart';
 
 class WorkoutExercise {
-  final String id;
-  final Exercise exercise;
-  final String reps;
-  final String pause;
-  final String notes;
+  final String? id;
+  final Exercise? exercise;
+  final String? reps;
+  final String? pause;
+  final String? notes;
   bool active;
 
   WorkoutExercise(

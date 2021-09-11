@@ -7,28 +7,28 @@ import "../helpers/server_helper.dart";
 import "../models/user.dart";
 
 class AuthProvider with ChangeNotifier {
-  String _authToken;
-  User _user;
+  String? _authToken;
+  User? _user;
 
   final apiUrl = "${ServerHelper.baseApiUrl}/users";
 
-  String get authToken {
+  String? get authToken {
     return _authToken;
   }
 
-  User get user {
+  User? get user {
     return _user;
   }
 
-  String get userId {
-    return _user != null ? _user.id : null;
+  String? get userId {
+    return _user != null ? _user!.id : null;
   }
 
   bool get isAuth {
     return _authToken != null;
   }
 
-  Future<void> auth(String username, String password) async {
+  Future<void> auth(String? username, String? password) async {
     final response = await ServerHelper.post(
       "$apiUrl/login",
       json.encode(
@@ -38,7 +38,7 @@ class AuthProvider with ChangeNotifier {
         },
       ),
     );
-    _updateUser(response.body, response.headers["authorization"]);
+    _updateUser(response.body, response.headers["authorization"]!);
   }
 
   Future<void> logout() async {
@@ -54,8 +54,8 @@ class AuthProvider with ChangeNotifier {
     if (!prefs.containsKey("auth_token")) {
       return false;
     }
-    _authToken = prefs.get("auth_token");
-    _user = User.parseUJSon(json.decode(prefs.get("userData")));
+    _authToken = prefs.get("auth_token") as String?;
+    _user = User.parseUJSon(json.decode(prefs.get("userData") as String));
     notifyListeners();
     return true;
   }
@@ -69,14 +69,14 @@ class AuthProvider with ChangeNotifier {
 
     if (authToken.isNotEmpty) {
       _authToken = authToken;
-      prefs.setString("auth_token", _authToken);
+      prefs.setString("auth_token", _authToken!);
     }
     notifyListeners();
   }
 
-  Future<void> updateUser(Map<String, String> userData) async {
+  Future<void> updateUser(Map<String, String?> userData) async {
     final response =
-        await ServerHelper.put("$apiUrl/${_user.id}", json.encode(userData),_authToken);
+        await ServerHelper.put("$apiUrl/${_user!.id}", json.encode(userData),_authToken!);
     _updateUser(response.body, "");
   }
 }

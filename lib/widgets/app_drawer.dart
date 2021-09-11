@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:gym_workout_program/screens/dashboard_screen.dart';
 import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
+import '../screens/dashboard_screen.dart';
 import "../screens/user_profile_screen.dart";
 
 class AppDrawer extends StatelessWidget {
@@ -10,14 +10,12 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Theme.of(context).accentColor,
         child: Column(
           children: [
             Consumer<AuthProvider>(
               builder: (_, auth, _c) => AppBar(
-                title: Text("Hello ${auth.user.firstName}"),
+                title: Text("Hello ${auth.user!.firstName}"),
                 automaticallyImplyLeading: false,
-                backgroundColor: Theme.of(context).accentColor,
               ),
             ),
             Divider(

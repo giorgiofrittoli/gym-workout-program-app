@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gym_workout_program/providers/workout_provider.dart';
-import 'package:gym_workout_program/widgets/app_drawer.dart';
-import 'package:gym_workout_program/widgets/workout_program_widget.dart';
+import '../providers/workout_provider.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/workout_program_widget.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -20,7 +20,6 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
         title: Text("Dashboard"),
-        backgroundColor: Theme.of(context).accentColor,
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(

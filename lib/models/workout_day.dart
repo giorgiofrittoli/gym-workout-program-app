@@ -1,11 +1,11 @@
-import 'package:gym_workout_program/models/workout_exercise.dart';
+import '../models/workout_exercise.dart';
 
 class WorkoutDay {
-  final String id;
-  final String title;
-  final String description;
-  final int order;
-  final List<WorkoutExercise> lWorkoutExercise;
+  final String? id;
+  final String? title;
+  final String? description;
+  final int? order;
+  final List<WorkoutExercise>? lWorkoutExercise;
   bool active;
 
   WorkoutDay({

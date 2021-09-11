@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:gym_workout_program/providers/workout_provider.dart';
+import '../providers/workout_provider.dart';
 import "package:provider/provider.dart";
 
 import '../widgets/workout_day_item.dart';
@@ -9,7 +9,7 @@ class WorkoutDayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context).settings.arguments as String;
+    final id = ModalRoute.of(context)!.settings.arguments as String?;
     final wProvider = Provider.of<WorkoutProvider>(
       context,
       listen: false,
@@ -17,17 +17,15 @@ class WorkoutDayScreen extends StatelessWidget {
     wProvider.resetExercices(id);
     final workoutDay = wProvider.workoutDay(id);
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: Text(workoutDay.title),
-        backgroundColor: Theme.of(context).accentColor,
+        title: Text(workoutDay.title!),
       ),
       body: Container(
         child: ListView.builder(
           itemBuilder: (ctx, i) {
-            return WorkoutDayItem(id, workoutDay.lWorkoutExercise[i]);
+            return WorkoutDayItem(id, workoutDay.lWorkoutExercise![i]);
           },
-          itemCount: workoutDay.lWorkoutExercise.length,
+          itemCount: workoutDay.lWorkoutExercise!.length,
         ),
       ),
     );

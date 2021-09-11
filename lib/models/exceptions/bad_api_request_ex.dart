@@ -1,6 +1,6 @@
 class BadApiRequestError implements Exception {
 
-  final List<Map<String,Object>> errors;
+  final List<Map<String,Object>>? errors;
 
   BadApiRequestError(this.errors);
 

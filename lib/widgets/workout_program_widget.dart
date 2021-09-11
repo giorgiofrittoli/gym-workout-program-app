@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gym_workout_program/models/workout_program.dart';
-import 'package:gym_workout_program/widgets/workout_program_item.dart';
+import '../models/workout_program.dart';
+import '../widgets/workout_program_item.dart';
 
 class WorkoutProgramWidget extends StatelessWidget {
-  final WorkoutProgram _workoutProgram;
+  final WorkoutProgram? _workoutProgram;
 
   WorkoutProgramWidget(this._workoutProgram);
 
@@ -13,12 +13,12 @@ class WorkoutProgramWidget extends StatelessWidget {
       children: [
         SizedBox(height: 20),
         Text(
-          "Data inizio: ${_workoutProgram.startS}",
+          "Data inizio: ${_workoutProgram!.startS}",
           style: Theme.of(context).textTheme.subtitle1,
         ),
         SizedBox(height: 5),
         Text(
-          "Durata: ${_workoutProgram.duration}",
+          "Durata: ${_workoutProgram!.duration}",
           style: Theme.of(context).textTheme.subtitle1,
         ),
         SizedBox(height: 20),
@@ -31,9 +31,9 @@ class WorkoutProgramWidget extends StatelessWidget {
           height: 400,
           child: ListView.builder(
             itemBuilder: (ctx, i) {
-              return WorkoutProgramItem(_workoutProgram.workoutDays[i]);
+              return WorkoutProgramItem(_workoutProgram!.workoutDays![i]);
             },
-            itemCount: _workoutProgram.workoutDays.length,
+            itemCount: _workoutProgram!.workoutDays!.length,
           ),
         )
       ],

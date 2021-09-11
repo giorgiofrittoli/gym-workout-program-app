@@ -1,12 +1,12 @@
 import "package:flutter/material.dart";
-import 'package:gym_workout_program/providers/workout_provider.dart';
+import '../providers/workout_provider.dart';
 import "package:provider/provider.dart";
 
 import '../models/workout_exercise.dart';
 import "../screens/workout_exercise_screen.dart";
 
 class WorkoutDayItem extends StatefulWidget {
-  final String idWorkoutDay;
+  final String? idWorkoutDay;
   final WorkoutExercise workoutExercise;
 
   WorkoutDayItem(this.idWorkoutDay, this.workoutExercise);
@@ -36,11 +36,11 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                         height: 50,
                       )
                     : Text(
-                        widget.workoutExercise.exercise.name,
+                        widget.workoutExercise.exercise!.name!,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                 title: !_expanded && !widget.workoutExercise.active
-                    ? Text(widget.workoutExercise.exercise.name)
+                    ? Text(widget.workoutExercise.exercise!.name!)
                     : Text(""),
                 trailing: widget.workoutExercise.active
                     ? IconButton(
@@ -85,7 +85,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  widget.workoutExercise.reps,
+                                  widget.workoutExercise.reps!,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -110,10 +110,10 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
 
 class WorkoutImage extends StatelessWidget {
   const WorkoutImage({
-    Key key,
-    @required this.workoutExercise,
-    @required this.width,
-    @required this.height,
+    Key? key,
+    required this.workoutExercise,
+    required this.width,
+    required this.height,
   }) : super(key: key);
 
   final WorkoutExercise workoutExercise;
@@ -130,17 +130,17 @@ class WorkoutImage extends StatelessWidget {
         width: width,
         height: height,
         child: Image.network(
-          workoutExercise.exercise.imageURL,
+          workoutExercise.exercise!.imageURL!,
           fit: BoxFit.cover,
           loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent loadingProgress) {
+              ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) return child;
             return Center(
               child: CircularProgressIndicator(
                 valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                 value: loadingProgress.expectedTotalBytes != null
                     ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes
+                        loadingProgress.expectedTotalBytes!
                     : null,
               ),
             );

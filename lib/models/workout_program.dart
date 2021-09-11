@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:gym_workout_program/models/workout_day.dart';
+import '../models/workout_day.dart';
 import 'package:intl/intl.dart';
 
 import 'user.dart';
 
 class WorkoutProgram with ChangeNotifier {
-  final String id;
-  final DateTime start;
-  final DateTime end;
-  final String duration;
-  final User user;
-  List<WorkoutDay> workoutDays;
+  final String? id;
+  final DateTime? start;
+  final DateTime? end;
+  final String? duration;
+  final User? user;
+  List<WorkoutDay>? workoutDays;
 
   WorkoutProgram(
       {this.id,
@@ -20,7 +20,7 @@ class WorkoutProgram with ChangeNotifier {
       this.user,
       this.workoutDays});
 
-  static DateTime parseDateTime(String sDate) {
+  static DateTime? parseDateTime(String? sDate) {
     if (sDate == "" || sDate == "null" || sDate == null)
       return null;
     else
@@ -28,7 +28,7 @@ class WorkoutProgram with ChangeNotifier {
   }
 
   String get startS {
-    return DateFormat("dd-MM-yyyy").format(start);
+    return DateFormat("dd-MM-yyyy").format(start!);
   }
 
   @override

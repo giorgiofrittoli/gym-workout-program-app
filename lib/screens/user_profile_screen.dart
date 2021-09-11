@@ -26,8 +26,8 @@ class _UserProfileScreenState extends State
   var _isLoading = false;
 
   Future<void> _submit() async {
-    if (!_formKey.currentState.validate()) return;
-    _formKey.currentState.save();
+    if (!_formKey.currentState!.validate()) return;
+    _formKey.currentState!.save();
 
     _isLoading = true;
 
@@ -58,7 +58,7 @@ class _UserProfileScreenState extends State
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -67,7 +67,7 @@ class _UserProfileScreenState extends State
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final user = Provider.of<AuthProvider>(context, listen: false).user;
+      final user = Provider.of<AuthProvider>(context, listen: false).user!;
       _userData["username"] = user.username;
       _userData["firstName"] = user.firstName;
       _userData["lastName"] = user.lastName;
@@ -80,42 +80,41 @@ class _UserProfileScreenState extends State
     _userData[field] = value;
   }
 
-  String _validateUsername(String value) {
+  String? _validateUsername(String value) {
     if (value.isEmpty) {
-      _tabController.animateTo(0);
+      _tabController!.animateTo(0);
       return "Inserire l'username";
     }
     return null;
   }
 
-  String _validateFirstName(String value) {
+  String? _validateFirstName(String value) {
     if (value.isEmpty) {
-      _tabController.animateTo(1);
+      _tabController!.animateTo(1);
       return "Inserire il nome";
     }
     return null;
   }
 
-  String _validateLastName(String value) {
+  String? _validateLastName(String value) {
     if (value.isEmpty) {
-      _tabController.animateTo(1);
+      _tabController!.animateTo(1);
       return "Inserire il cognome";
     }
     return null;
   }
 
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   Widget build(BuildContext context) {
     final deviceInfo = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
         title: Text("Profilo utente"),
-        backgroundColor: Theme.of(context).accentColor,
       ),
       bottomNavigationBar: TabBar(
+        indicatorColor: Colors.green,
         controller: _tabController,
         tabs: [
           Tab(
@@ -132,7 +131,6 @@ class _UserProfileScreenState extends State
         child: _isLoading
             ? Center(child: CircularProgressIndicator())
             : Card(
-                color: Theme.of(context).accentColor,
                 child: Form(
                   key: _formKey,
                   child: TabBarView(
@@ -195,7 +193,6 @@ class _UserProfileScreenState extends State
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _submit,
-        backgroundColor: Colors.blue,
         child: Icon(Icons.save),
       ),
       drawer: AppDrawer(),

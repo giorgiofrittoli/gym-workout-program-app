@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:gym_workout_program/helpers/widget_helper.dart';
-import 'package:gym_workout_program/models/workout_exercise.dart';
+import '../helpers/widget_helper.dart';
+import '../models/workout_exercise.dart';
 
 class WorkoutExcerciseScreen extends StatelessWidget {
   static const routeName = "/workout-exercize";
@@ -10,12 +10,10 @@ class WorkoutExcerciseScreen extends StatelessWidget {
     var mq = MediaQuery.of(context);
 
     final workoutExercise =
-        ModalRoute.of(context).settings.arguments as WorkoutExercise;
+        ModalRoute.of(context)!.settings.arguments as WorkoutExercise;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: Text("${workoutExercise.exercise.name}"),
-        backgroundColor: Theme.of(context).accentColor,
+        title: Text("${workoutExercise.exercise!.name}"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -32,7 +30,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
               Card(
                 elevation: 2,
                 child: Image.network(
-                  workoutExercise.exercise.imageURL,
+                  workoutExercise.exercise!.imageURL!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -47,7 +45,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "${workoutExercise.exercise.description}",
+                    "${workoutExercise.exercise!.description}",
                     textAlign: TextAlign.center,
                     softWrap: true,
                     style: Theme.of(context).textTheme.subtitle1,

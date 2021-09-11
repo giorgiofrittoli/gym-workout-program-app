@@ -4,7 +4,12 @@ class User {
   final String firstName;
   final String lastName;
 
-  User({this.id, this.username, this.firstName, this.lastName});
+  User({
+    required this.id,
+    required this.username,
+    required this.firstName,
+    required this.lastName,
+  });
 
   static User parseUJSon(Map<String, dynamic> jsonData) {
     return User(
