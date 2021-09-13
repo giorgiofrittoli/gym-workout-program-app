@@ -3,6 +3,7 @@ import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
 import '../screens/dashboard_screen.dart';
+import '../screens/exercise_list_screen.dart';
 import "../screens/user_profile_screen.dart";
 
 class AppDrawer extends StatelessWidget {
@@ -21,67 +22,34 @@ class AppDrawer extends StatelessWidget {
             Divider(
               height: 20,
             ),
-            ListTile(
-              leading: Icon(
-                Icons.folder_shared_sharp,
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-              title: Text(
-                "Dashboard",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(DashboardScreen.routeName);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.person,
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-              title: Text(
-                "Profilo utente",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(UserProfileScreen.routeName);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.view_list,
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-              title: Text(
-                "Archivio schede",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(UserProfileScreen.routeName);
-              },
+            AppDrawerItem(
+              icon: Icons.folder_shared_sharp,
+              title: "Dashboard",
+              route: DashboardScreen.routeName,
             ),
             Divider(color: Colors.white, thickness: 0.5),
-            ListTile(
-              leading: Icon(
-                Icons.exit_to_app,
-                color: Theme.of(context).primaryIconTheme.color,
-              ),
-              title: Text(
-                "Logout",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
+            AppDrawerItem(
+              icon: Icons.person,
+              title: "Profilo utente",
+              route: UserProfileScreen.routeName,
+            ),
+            Divider(color: Colors.white, thickness: 0.5),
+            AppDrawerItem(
+              icon: Icons.view_list,
+              title: "Archivio schede",
+              route: UserProfileScreen.routeName,
+            ),
+            Divider(color: Colors.white, thickness: 0.5),
+            AppDrawerItem(
+              icon: Icons.view_list,
+              title: "Esercizi",
+              route: ExerciseListScreen.routeName,
+            ),
+            Divider(color: Colors.white, thickness: 0.5),
+            AppDrawerItem(
+              icon: Icons.exit_to_app,
+              title: "Logout",
+              action: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed("/");
                 Provider.of<AuthProvider>(context, listen: false).logout();
@@ -90,6 +58,44 @@ class AppDrawer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AppDrawerItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String? route;
+  final Function? action;
+
+  AppDrawerItem({
+    required this.icon,
+    required this.title,
+    this.route,
+    this.action,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: Theme.of(context).primaryIconTheme.color,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      onTap: () {
+        if (action != null) {
+          action!();
+        }
+        if (route != null) {
+          Navigator.of(context).pushReplacementNamed(route!);
+        }
+      },
     );
   }
 }

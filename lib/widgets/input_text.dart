@@ -32,7 +32,7 @@ class InputText extends StatelessWidget {
       ),
       style: Theme.of(context).textTheme.subtitle2,
       keyboardType: TextInputType.emailAddress,
-      validator: (value) => validator != null ? validator!(value) : null,
+      validator: (value) => validator != null ? validator!(field, value) : null,
       onSaved: (value) => savedInput(field, value),
     );
   }

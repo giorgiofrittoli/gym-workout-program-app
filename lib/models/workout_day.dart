@@ -22,16 +22,14 @@ class WorkoutDay {
     return 'WorkoutDay{id: $id, title: $title, description: $description, order: $order, lWorkoutExercise: $lWorkoutExercise, active: $active}';
   }
 
-  static WorkoutDay parseWDJson(Map<String, dynamic> data) {
+  static WorkoutDay fromJson(Map<String, dynamic> data) {
     return WorkoutDay(
       id: data["id"],
       title: data["title"],
       description: data["description"],
       order: int.parse(data["showOrder"]),
       lWorkoutExercise: (data["workoutExerciseList"] as List<dynamic>)
-          .map(
-            (workoutExercise) => WorkoutExercise.parseWEJson(workoutExercise),
-          )
+          .map((workoutExercise) => WorkoutExercise.fromJson(workoutExercise))
           .toList(),
     );
   }

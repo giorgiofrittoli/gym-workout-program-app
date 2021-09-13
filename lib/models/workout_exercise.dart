@@ -21,12 +21,12 @@ class WorkoutExercise {
     return 'WorkoutExercise{id: $id, exercise: $exercise, reps: $reps, pause: $pause, notes: $notes, active: $active}';
   }
 
-  static WorkoutExercise parseWEJson(Map<String, dynamic> data) {
+  static WorkoutExercise fromJson(Map<String, dynamic> data) {
     return WorkoutExercise(
       id: data["id"],
       reps: data["reps"],
       pause: data["pause"],
-      exercise: Exercise.parseEJson(
+      exercise: Exercise.fromJson(
         data["exercise"],
       ),
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym_workout_program/providers/exercise_provider.dart';
+import 'package:gym_workout_program/screens/exercise_list_screen.dart';
+import 'package:gym_workout_program/screens/exercise_screen.dart';
 import "package:provider/provider.dart";
 
 import "./providers/auth_provider.dart";
@@ -29,6 +32,13 @@ class MyApp extends StatelessWidget {
             auth.userId,
           ),
         ),
+        ChangeNotifierProxyProvider<AuthProvider, ExcerciseProvider>(
+          create: (ctx) => ExcerciseProvider(null, null),
+          update: (_, auth, prevExProvider) => ExcerciseProvider(
+            prevExProvider != null ? prevExProvider.exercises : null,
+            auth.authToken,
+          ),
+        ),
       ],
       child: Consumer<AuthProvider>(
         builder: (_, auth, _c) => MaterialApp(
@@ -42,7 +52,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.green,
             ),
             primaryIconTheme: IconThemeData(
-              color: Colors.green,
+              color: Colors.white,
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: ThemeData.dark().textTheme.copyWith(
@@ -80,6 +90,8 @@ class MyApp extends StatelessWidget {
             WorkoutDayScreen.routeName: (_) => WorkoutDayScreen(),
             WorkoutExcerciseScreen.routeName: (_) => WorkoutExcerciseScreen(),
             UserProfileScreen.routeName: (_) => UserProfileScreen(),
+            ExerciseListScreen.routeName: (_) => ExerciseListScreen(),
+            ExerciseScreen.routeName: (_) => ExerciseScreen(),
           },
         ),
       ),

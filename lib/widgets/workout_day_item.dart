@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import '../providers/workout_provider.dart';
 import "package:provider/provider.dart";
 
 import '../models/workout_exercise.dart';
+import '../providers/workout_provider.dart';
 import "../screens/workout_exercise_screen.dart";
 
 class WorkoutDayItem extends StatefulWidget {
@@ -36,11 +36,11 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                         height: 50,
                       )
                     : Text(
-                        widget.workoutExercise.exercise!.name!,
+                        widget.workoutExercise.exercise!.name,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                 title: !_expanded && !widget.workoutExercise.active
-                    ? Text(widget.workoutExercise.exercise!.name!)
+                    ? Text(widget.workoutExercise.exercise!.name)
                     : Text(""),
                 trailing: widget.workoutExercise.active
                     ? IconButton(

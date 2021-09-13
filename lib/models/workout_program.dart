@@ -44,7 +44,7 @@ class WorkoutProgram with ChangeNotifier {
       end: parseDateTime(data["end"]),
       workoutDays: (data["workoutDayList"] as List<dynamic>)
           .map(
-            (dataWorkoutDay) => WorkoutDay.parseWDJson(dataWorkoutDay),
+            (dataWorkoutDay) => WorkoutDay.fromJson(dataWorkoutDay),
           )
           .toList(),
     );
