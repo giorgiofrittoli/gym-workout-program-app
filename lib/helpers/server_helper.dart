@@ -21,17 +21,27 @@ class ServerHelper {
     }
   }
 
-  static Future<http.Response> post(String url, String jsonBody) async {
+  static Future<http.Response> post(
+    String url,
+    String jsonBody, {
+    String authToken = "",
+  }) async {
     final response = await http.post(
       Uri.parse(url),
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Authorization": authToken,
+        "Content-Type": "application/json",
+      },
       body: jsonBody,
     );
     return _handleResponse(response);
   }
 
   static Future<http.Response> put(
-      String url, String jsonBody, String authToken) async {
+    String url,
+    String jsonBody, {
+    String authToken = "",
+  }) async {
     final response = await http.put(
       Uri.parse(url),
       headers: {

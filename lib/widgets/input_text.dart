@@ -6,6 +6,7 @@ class InputText extends StatelessWidget {
   final String? initValue;
   final Function? validator;
   final Function savedInput;
+  final int maxLines;
 
   InputText({
     required this.field,
@@ -13,6 +14,7 @@ class InputText extends StatelessWidget {
     required this.initValue,
     required this.validator,
     required this.savedInput,
+    this.maxLines = 1,
   });
 
   @override
@@ -34,6 +36,7 @@ class InputText extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       validator: (value) => validator != null ? validator!(field, value) : null,
       onSaved: (value) => savedInput(field, value),
+      maxLines: maxLines,
     );
   }
 }

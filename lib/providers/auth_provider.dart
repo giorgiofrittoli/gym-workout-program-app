@@ -75,8 +75,11 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> updateUser(Map<String, String?> userData) async {
-    final response =
-        await ServerHelper.put("$apiUrl/${_user!.id}", json.encode(userData),_authToken!);
+    final response = await ServerHelper.put(
+      "$apiUrl/${_user!.id}",
+      json.encode(userData),
+      authToken: _authToken!,
+    );
     _updateUser(response.body, "");
   }
 }

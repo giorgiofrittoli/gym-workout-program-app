@@ -26,21 +26,29 @@ class ExcerciseProvider with ChangeNotifier {
   }
 
   Future<void> insertExercise(Map<String, String> data) async {
+    log("insertExercise");
+
+    final response = await ServerHelper.post(
+      "$apiUrl/",
+      json.encode(data),
+      authToken: _authToken!,
+    );
+
+    log(response.body);
+
     await getExcercises();
   }
 
-  Future<void> updateExercise(Map<String, String> data) async {
-    // log("updateAppuntamento");
-    //
-    // appuntamento.idUser = idUser;
-    //
-    // final response = await ServerHelper.put(
-    //   "$apiUrl?action=UPDATE&id=${appuntamento.id}",
-    //   json.encode(appuntamento.toPostMap()),
-    //   _authToken,
-    // );
-    //
-    // log(response.body);
+  Future<void> updateExercise(String id, Map<String, String> data) async {
+    log("updateExercise");
+
+    final response = await ServerHelper.put(
+      "$apiUrl/$id",
+      json.encode(data),
+      authToken: _authToken!,
+    );
+
+    log(response.body);
 
     await getExcercises();
   }
