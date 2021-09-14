@@ -10,6 +10,8 @@ class ServerHelper {
   static const serverUrl = "http://192.168.1.50:8080";
   static const baseApiUrl = serverUrl + "/api/v1";
 
+  static const serverImagesBaseUrl = "http://192.168.1.50";
+
   static http.Response _handleResponse(http.Response response) {
     if (response.statusCode != 200 && response.statusCode != 403) {
       throw GenericServerError();
