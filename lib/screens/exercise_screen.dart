@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gym_workout_program/helpers/server_helper.dart';
 import 'package:gym_workout_program/providers/exercise_provider.dart';
 import 'package:gym_workout_program/widgets/input_text.dart';
 import 'package:image_picker/image_picker.dart';
@@ -131,7 +132,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         width: 200,
         height: 200,
         child: Image.network(
-          _loadedExercise!.imageURL!,
+          "${ServerHelper.serverImagesBaseUrl}${_loadedExercise!.imageURL!}?cache=${UniqueKey().toString()}",
           fit: BoxFit.cover,
         ),
       );
