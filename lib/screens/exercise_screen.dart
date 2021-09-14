@@ -35,7 +35,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   var _exerciseData = {
     "name": "",
     "description": "",
-    "base64Image": "",
+    "imageBase64": "",
   };
 
   Future<void> _submit() async {
@@ -44,7 +44,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
     if (_pickedImage != null) {
       final bytes = File(_pickedImage!.path).readAsBytesSync();
-      _exerciseData["base64Image"] = base64Encode(bytes);
+      _exerciseData["imageBase64"] = base64Encode(bytes);
     }
 
     try {
