@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+
 import '../helpers/widget_helper.dart';
 import '../models/workout_exercise.dart';
 
@@ -21,10 +22,9 @@ class WorkoutExcerciseScreen extends StatelessWidget {
           padding: EdgeInsets.all(10),
           margin: EdgeInsets.all(10),
           decoration: new BoxDecoration(
-              color: Theme.of(context).accentColor,
               borderRadius: new BorderRadius.all(
-                const Radius.circular(10.0),
-              )),
+            const Radius.circular(10.0),
+          )),
           child: Column(
             children: [
               Card(
