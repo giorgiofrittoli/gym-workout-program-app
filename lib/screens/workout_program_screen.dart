@@ -1,26 +1,22 @@
 import "package:flutter/material.dart";
-import '../models/workout_program.dart';
-import '../widgets/workout_program_widget.dart';
 
+import '../models/workout_program.dart';
 import "../widgets/app_drawer.dart";
+import '../widgets/workout_program_widget.dart';
 
 class WorkoutProgramScreen extends StatelessWidget {
   static const routeName = "workout-program";
 
-  final WorkoutProgram id;
-
-  WorkoutProgramScreen(this.id);
-
   @override
   Widget build(BuildContext context) {
-    WorkoutProgram? v;
+    final WorkoutProgram workoutProgram =
+        ModalRoute.of(context)!.settings.arguments as WorkoutProgram;
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Workout program"),
       ),
-      body: WorkoutProgramWidget(v),
-      drawer: AppDrawer(),
+      body: WorkoutProgramWidget(workoutProgram),
     );
   }
 }

@@ -24,7 +24,6 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
       builder: (_, workoutProvider, _c) => Container(
         margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         child: Card(
-          color: Theme.of(context).accentColor,
           elevation: 2,
           child: Column(
             children: [

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym_workout_program/providers/exercise_provider.dart';
 import 'package:gym_workout_program/screens/exercise_list_screen.dart';
 import 'package:gym_workout_program/screens/exercise_screen.dart';
+import 'package:gym_workout_program/screens/workout_program_list.dart';
+import 'package:gym_workout_program/screens/workout_program_screen.dart';
 import "package:provider/provider.dart";
 
 import "./providers/auth_provider.dart";
@@ -92,6 +94,8 @@ class MyApp extends StatelessWidget {
             UserProfileScreen.routeName: (_) => UserProfileScreen(),
             ExerciseListScreen.routeName: (_) => ExerciseListScreen(),
             ExerciseScreen.routeName: (_) => ExerciseScreen(),
+            WorkoutProgramsScreen.routeName: (_) => WorkoutProgramsScreen(),
+            WorkoutProgramScreen.routeName: (_) => WorkoutProgramScreen(),
           },
         ),
       ),

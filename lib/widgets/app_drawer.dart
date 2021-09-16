@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:gym_workout_program/screens/workout_program_list.dart';
 import "package:provider/provider.dart";
 
 import "../providers/auth_provider.dart";
@@ -37,7 +38,7 @@ class AppDrawer extends StatelessWidget {
             AppDrawerItem(
               icon: Icons.view_list,
               title: "Archivio schede",
-              route: UserProfileScreen.routeName,
+              route: WorkoutProgramsScreen.routeName,
             ),
             Divider(color: Colors.white, thickness: 0.5),
             AppDrawerItem(
