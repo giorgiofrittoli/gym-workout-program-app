@@ -1,15 +1,14 @@
 import "package:flutter/material.dart";
+import 'package:gym_workout_program/providers/workout_day_provider.dart';
 import "package:provider/provider.dart";
 
 import '../models/workout_exercise.dart';
-import '../providers/workout_provider.dart';
 import "../screens/workout_exercise_screen.dart";
 
 class WorkoutDayItem extends StatefulWidget {
-  final String? idWorkoutDay;
-  final WorkoutExercise workoutExercise;
+  final int idWorkoutExercise;
 
-  WorkoutDayItem(this.idWorkoutDay, this.workoutExercise);
+  WorkoutDayItem(this.idWorkoutExercise);
 
   @override
   _WorkoutDayItemState createState() => _WorkoutDayItemState();
@@ -20,39 +19,55 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkoutProvider>(
-      builder: (_, workoutProvider, _c) => Container(
+    return Consumer<WorkoutDayProvider>(
+      key: UniqueKey(),
+      builder: (_, workoutDayProvider, _c) => Container(
         margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         child: Card(
           elevation: 2,
           child: Column(
             children: [
               ListTile(
-                leading: !_expanded && !widget.workoutExercise.active
+                leading: !_expanded &&
+                        !workoutDayProvider.workoutDay
+                            .lWorkoutExercise[widget.idWorkoutExercise].active
                     ? WorkoutImage(
-                        workoutExercise: widget.workoutExercise,
+                        workoutExercise: workoutDayProvider.workoutDay
+                            .lWorkoutExercise[widget.idWorkoutExercise],
                         width: 50,
                         height: 50,
                       )
                     : Text(
-                        widget.workoutExercise.exercise!.name,
+                        workoutDayProvider
+                            .workoutDay
+                            .lWorkoutExercise[widget.idWorkoutExercise]
+                            .exercise
+                            .name,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
-                title: !_expanded && !widget.workoutExercise.active
-                    ? Text(widget.workoutExercise.exercise!.name)
+                title: !_expanded &&
+                        !workoutDayProvider.workoutDay
+                            .lWorkoutExercise[widget.idWorkoutExercise].active
+                    ? Text(workoutDayProvider
+                        .workoutDay
+                        .lWorkoutExercise[widget.idWorkoutExercise]
+                        .exercise
+                        .name)
                     : Text(""),
-                trailing: widget.workoutExercise.active
+                trailing: workoutDayProvider.workoutDay
+                        .lWorkoutExercise[widget.idWorkoutExercise].active
                     ? IconButton(
                         color: Colors.white,
                         icon: Icon(Icons.check),
-                        onPressed: () => Provider.of<WorkoutProvider>(
-                          context,
-                          listen: false,
-                        ).nextExercise(widget.idWorkoutDay),
+                        onPressed: () => workoutDayProvider.nextExercise(),
                       )
                     : IconButton(
                         color: Colors.white,
-                        icon: Icon(_expanded || widget.workoutExercise.active
+                        icon: Icon(_expanded ||
+                                workoutDayProvider
+                                    .workoutDay
+                                    .lWorkoutExercise[widget.idWorkoutExercise]
+                                    .active
                             ? Icons.expand_less
                             : Icons.expand_more),
                         onPressed: () {
@@ -62,14 +77,17 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                         },
                       ),
               ),
-              if (widget.workoutExercise.active || _expanded)
+              if (workoutDayProvider.workoutDay
+                      .lWorkoutExercise[widget.idWorkoutExercise].active ||
+                  _expanded)
                 Container(
                   margin: EdgeInsets.only(left: 10, bottom: 10),
                   height: 100,
                   child: Row(
                     children: [
                       WorkoutImage(
-                        workoutExercise: widget.workoutExercise,
+                        workoutExercise: workoutDayProvider.workoutDay
+                            .lWorkoutExercise[widget.idWorkoutExercise],
                         width: 120,
                         height: 100,
                       ),
@@ -84,12 +102,16 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  widget.workoutExercise.reps!,
+                                  workoutDayProvider
+                                      .workoutDay
+                                      .lWorkoutExercise[
+                                          widget.idWorkoutExercise]
+                                      .reps,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               Text(
-                                "Pausa: ${widget.workoutExercise.pause}",
+                                "Pausa: ${workoutDayProvider.workoutDay.lWorkoutExercise[widget.idWorkoutExercise].pause}",
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -129,7 +151,7 @@ class WorkoutImage extends StatelessWidget {
         width: width,
         height: height,
         child: Image.network(
-          workoutExercise.exercise!.imageURL!,
+          workoutExercise.exercise.imageURL!,
           fit: BoxFit.cover,
           loadingBuilder: (BuildContext context, Widget child,
               ImageChunkEvent? loadingProgress) {

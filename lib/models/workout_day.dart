@@ -1,19 +1,19 @@
 import '../models/workout_exercise.dart';
 
 class WorkoutDay {
-  final String? id;
-  final String? title;
-  final String? description;
-  final int? order;
-  final List<WorkoutExercise>? lWorkoutExercise;
+  final String id;
+  final String title;
+  final String description;
+  final int order;
+  final List<WorkoutExercise> lWorkoutExercise;
   bool active;
 
   WorkoutDay({
-    this.id,
-    this.title,
-    this.description,
-    this.order,
-    this.lWorkoutExercise,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.order,
+    required this.lWorkoutExercise,
     this.active = false,
   });
 

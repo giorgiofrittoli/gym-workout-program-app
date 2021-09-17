@@ -14,7 +14,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as WorkoutExercise;
     return Scaffold(
       appBar: AppBar(
-        title: Text("${workoutExercise.exercise!.name}"),
+        title: Text("${workoutExercise.exercise.name}"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -30,7 +30,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
               Card(
                 elevation: 2,
                 child: Image.network(
-                  workoutExercise.exercise!.imageURL!,
+                  workoutExercise.exercise.imageURL!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +45,7 @@ class WorkoutExcerciseScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "${workoutExercise.exercise!.description}",
+                    "${workoutExercise.exercise.description}",
                     textAlign: TextAlign.center,
                     softWrap: true,
                     style: Theme.of(context).textTheme.subtitle1,
