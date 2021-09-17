@@ -170,7 +170,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     final deviceInfo = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profilo utente"),
+        title: Text("Esercizio"),
       ),
       body: Container(
         margin: EdgeInsets.all(5),
