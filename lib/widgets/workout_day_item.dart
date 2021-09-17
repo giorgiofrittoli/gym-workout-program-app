@@ -19,9 +19,12 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkoutDayProvider>(
-      key: UniqueKey(),
-      builder: (_, workoutDayProvider, _c) => Container(
+    return Consumer<WorkoutDayProvider>(builder: (_, workoutDayProvider, _c) {
+      print(
+        "${widget.idWorkoutExercise} - ${workoutDayProvider.workoutDay.lWorkoutExercise[widget.idWorkoutExercise].active}",
+      );
+
+      return Container(
         margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         child: Card(
           elevation: 2,
@@ -124,8 +127,8 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

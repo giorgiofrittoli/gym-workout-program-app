@@ -19,14 +19,14 @@ class WorkoutDayScreen extends StatelessWidget {
         title: Text(workoutDay.title),
       ),
       body: Container(
-        child: ListView.builder(
-          itemBuilder: (ctx, i) {
-            return ChangeNotifierProvider(
-              create: (ctx) => WorkoutDayProvider(workoutDay),
-              child: WorkoutDayItem(i),
-            );
-          },
-          itemCount: workoutDay.lWorkoutExercise.length,
+        child: ChangeNotifierProvider(
+          create: (ctx) => WorkoutDayProvider(workoutDay),
+          child: ListView.builder(
+            itemBuilder: (ctx, i) {
+              return WorkoutDayItem(i);
+            },
+            itemCount: workoutDay.lWorkoutExercise.length,
+          ),
         ),
       ),
     );
