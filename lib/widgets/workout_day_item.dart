@@ -6,9 +6,9 @@ import '../models/workout_exercise.dart';
 import "../screens/workout_exercise_screen.dart";
 
 class WorkoutDayItem extends StatefulWidget {
-  final int idWorkoutExercise;
+  final WorkoutExercise _workoutExercise;
 
-  WorkoutDayItem(this.idWorkoutExercise);
+  WorkoutDayItem(this._workoutExercise);
 
   @override
   _WorkoutDayItemState createState() => _WorkoutDayItemState();
@@ -19,46 +19,28 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkoutDayProvider>(builder: (_, workoutDayProvider, _c) {
-      print(
-        "${widget.idWorkoutExercise} - ${workoutDayProvider.workoutDay.lWorkoutExercise[widget.idWorkoutExercise].active}",
-      );
-
-      return Container(
+    return Consumer<WorkoutDayProvider>(
+      builder: (_, workoutDayProvider, _c) => Container(
         margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         child: Card(
           elevation: 2,
           child: Column(
             children: [
               ListTile(
-                leading: !_expanded &&
-                        !workoutDayProvider.workoutDay
-                            .lWorkoutExercise[widget.idWorkoutExercise].active
+                leading: !_expanded && !widget._workoutExercise.active
                     ? WorkoutImage(
-                        workoutExercise: workoutDayProvider.workoutDay
-                            .lWorkoutExercise[widget.idWorkoutExercise],
+                        workoutExercise: widget._workoutExercise,
                         width: 50,
                         height: 50,
                       )
                     : Text(
-                        workoutDayProvider
-                            .workoutDay
-                            .lWorkoutExercise[widget.idWorkoutExercise]
-                            .exercise
-                            .name,
+                        widget._workoutExercise.exercise.name,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
-                title: !_expanded &&
-                        !workoutDayProvider.workoutDay
-                            .lWorkoutExercise[widget.idWorkoutExercise].active
-                    ? Text(workoutDayProvider
-                        .workoutDay
-                        .lWorkoutExercise[widget.idWorkoutExercise]
-                        .exercise
-                        .name)
+                title: !_expanded && !widget._workoutExercise.active
+                    ? Text(widget._workoutExercise.exercise.name)
                     : Text(""),
-                trailing: workoutDayProvider.workoutDay
-                        .lWorkoutExercise[widget.idWorkoutExercise].active
+                trailing: widget._workoutExercise.active
                     ? IconButton(
                         color: Colors.white,
                         icon: Icon(Icons.check),
@@ -66,11 +48,7 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                       )
                     : IconButton(
                         color: Colors.white,
-                        icon: Icon(_expanded ||
-                                workoutDayProvider
-                                    .workoutDay
-                                    .lWorkoutExercise[widget.idWorkoutExercise]
-                                    .active
+                        icon: Icon(_expanded || widget._workoutExercise.active
                             ? Icons.expand_less
                             : Icons.expand_more),
                         onPressed: () {
@@ -80,17 +58,14 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                         },
                       ),
               ),
-              if (workoutDayProvider.workoutDay
-                      .lWorkoutExercise[widget.idWorkoutExercise].active ||
-                  _expanded)
+              if (widget._workoutExercise.active || _expanded)
                 Container(
                   margin: EdgeInsets.only(left: 10, bottom: 10),
                   height: 100,
                   child: Row(
                     children: [
                       WorkoutImage(
-                        workoutExercise: workoutDayProvider.workoutDay
-                            .lWorkoutExercise[widget.idWorkoutExercise],
+                        workoutExercise: widget._workoutExercise,
                         width: 120,
                         height: 100,
                       ),
@@ -105,16 +80,12 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  workoutDayProvider
-                                      .workoutDay
-                                      .lWorkoutExercise[
-                                          widget.idWorkoutExercise]
-                                      .reps,
+                                  widget._workoutExercise.reps,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               Text(
-                                "Pausa: ${workoutDayProvider.workoutDay.lWorkoutExercise[widget.idWorkoutExercise].pause}",
+                                "Pausa: ${widget._workoutExercise.pause}",
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -127,8 +98,8 @@ class _WorkoutDayItemState extends State<WorkoutDayItem> {
             ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }
 

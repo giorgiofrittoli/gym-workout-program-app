@@ -23,7 +23,7 @@ class WorkoutDayScreen extends StatelessWidget {
           create: (ctx) => WorkoutDayProvider(workoutDay),
           child: ListView.builder(
             itemBuilder: (ctx, i) {
-              return WorkoutDayItem(i);
+              return WorkoutDayItem(workoutDay.lWorkoutExercise[i]);
             },
             itemCount: workoutDay.lWorkoutExercise.length,
           ),
