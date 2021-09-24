@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_workout_program/providers/workout_provider.dart';
-import 'package:gym_workout_program/screens/exercise_screen.dart';
+import 'package:gym_workout_program/screens/new_workout_program_screen.dart';
 import 'package:gym_workout_program/screens/workout_program_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +67,7 @@ class WorkoutProgramsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => Navigator.of(context).pushNamed(
-          ExerciseScreen.routeName,
+          NewWorkoutProgramScreen.routeName,
         ),
       ),
     );

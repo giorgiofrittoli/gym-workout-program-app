@@ -38,4 +38,11 @@ class WidgetHelper {
         (paddBottom ? mq.padding.bottom : 0) -
         mq.padding.top;
   }
+
+  static String? genericDataValidator(String field, String? data) {
+    if (data == null || data.isEmpty) {
+      return "Inserire $field";
+    }
+    return null;
+  }
 }

@@ -11,8 +11,8 @@ class InputText extends StatelessWidget {
   InputText({
     required this.field,
     required this.title,
-    required this.initValue,
-    required this.validator,
+    this.initValue,
+    this.validator,
     required this.savedInput,
     this.maxLines = 1,
   });
@@ -33,7 +33,7 @@ class InputText extends StatelessWidget {
         labelStyle: Theme.of(context).textTheme.subtitle1,
       ),
       style: Theme.of(context).textTheme.subtitle2,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.text,
       validator: (value) => validator != null ? validator!(field, value) : null,
       onSaved: (value) => savedInput(field, value),
       maxLines: maxLines,
